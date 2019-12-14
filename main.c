@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:17:38 by jwebber           #+#    #+#             */
-/*   Updated: 2019/12/14 11:22:22 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/12/14 11:26:31 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 int main (int argc, char **argv)
 {
-	ft_printf("%i %s\n", argc, *argv);
+	ft_printf("%i {cyan}%s{eoc}\n", argc, *argv);
 	return (0);
 }
