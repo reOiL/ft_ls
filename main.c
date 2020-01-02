@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "args.h"
 
 void	pp(t_list *lst)
 {
@@ -23,9 +24,18 @@ void	pp(t_list *lst)
 int main (int argc, char **argv)
 {
 	t_list *lst;
+	t_list *files;
+	t_flag flag;
 
-	lst = get_all_directory("..");
-	ft_lstiter(lst, pp);
-	ft_lstdel(&lst, (void (*)(void *, size_t)) free_t_file);
+	if (argc != 1)
+	{
+		parse_attr(argv + 1, argc - 1, &files, &flag);
+	}
+	else
+	{
+		lst = get_all_directory(".");
+		ft_lstiter(lst, pp);
+		ft_lstdel(&lst, (void (*)(void *, size_t)) free_t_file);
+	}
 	return (0);
 }
