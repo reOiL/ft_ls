@@ -20,34 +20,40 @@ t_flag 	chr_to_flag(char c)
 	return (0);
 }
 
-/*
- * TODO: return false if failed parse flag!!!
- */
-void	parse_attr(char **str, int arg_count, t_list **lst, t_flag *flag)
+t_file	*get_filenames(char **str, int arg_count, int i)
 {
-	int		i;
-	t_flag	tmp;
+	t_file	*files;
 
-	if (str == NULL || lst == NULL || flag == NULL)
-		return;
-	*flag = 0;
-	*lst = NULL;
-	i = 0;
-	if (str[0][0] == '-')
-	{
-		i++;
-		while (i < ft_strlen(str[0]))
-		{
-			tmp = chr_to_flag(str[0][i]);
-		}
-	}
-	i = 0;
+	files = NULL;
 	while (i < arg_count)
 	{
-		//if (str[i][0] == '-' && (tmp = str_to_flag(str[i])))
-		//	*flag |= tmp;
-		//else
-		//	ft_lstadd(lst, ft_lstnew(str[i], ft_strlen(str[i])));
+		add_new_dir(&files, str[i]);
 		i++;
 	}
+	return (files);
+}
+
+int		parse_attr(char **str, int arg_count, t_file **files, t_flag *flag)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	*flag = 0;
+	*files = NULL;
+	while (str[i][0] == '-' && i < arg_count)
+	{
+		j = 1;
+		while (j < ft_strlen(str[i]))
+		{
+			if (!chr_to_flag(str[i][j]))
+				return (print_error(22, str[i][j]));
+			if (!(*flag & chr_to_flag(str[i][j])))
+				*flag += chr_to_flag(str[i][j]);
+			j++;
+		}
+		i++;
+	}
+	if (i != arg_count)
+		*files = get_filenames(str, arg_count, i); //взять все файлы
 }

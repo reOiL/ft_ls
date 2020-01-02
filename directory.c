@@ -47,7 +47,6 @@ t_list	*get_all_directory(char *path)
 			temp_lst->content = temp_file;
 			ft_lstadd(&lst, temp_lst);
 		}
-
 	}
 	closedir(dir);
 	return (lst);

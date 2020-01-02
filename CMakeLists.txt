@@ -3,6 +3,7 @@ project(ft_ls C)
 
 set(CMAKE_C_STANDARD 11)
 
+include_directories(.)
 include_directories(libft)
 include_directories(libft/ft_printf)
 
@@ -89,4 +90,13 @@ add_executable(ft_ls
         libft/get_next_line.c
         libft/get_next_line.h
         libft/libft.h
-        main.c ft_ls.h directory.c file.c utils.c arg_parser.c args.h)
+        arg_parser.c
+        args.h
+        directory.c
+        errors.c
+        file.c
+        ft_ls.h
+        l_flag.c
+        main.c
+        t_file_helper.c
+        utils.c)
