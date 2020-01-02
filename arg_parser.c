@@ -5,21 +5,39 @@
 #include "ft_ls.h"
 #include "args.h"
 
-t_flag 	chr_to_flag(char c)
+t_flag	chr_to_flag(char c)
 {
 	if (c == 'l')
-		return FLAG_l;
+		return (FLAG_l);
 	if (c == 'R')
-		return FLAG_R;
+		return (FLAG_R);
 	if (c == 'a')
-		return FLAG_a;
+		return (FLAG_a);
 	if (c == 'r')
-		return FLAG_r;
+		return (FLAG_r);
 	if (c == 't')
-		return FLAG_t;
+		return (FLAG_t);
 	return (0);
 }
 
+t_flag	str_to_flag(char *str)
+{
+	t_flag flg;
+	t_flag tmp;
+
+	flg = 0;
+	if (*str != '-')
+		return 0;
+	str++;
+	while (*str)
+	{
+		if (!(tmp = chr_to_flag(*str)))
+			return 0;
+		flg |= tmp;
+		str++;
+	}
+	return (flg);
+}
 /*
  * TODO: return false if failed parse flag!!!
  */
@@ -33,21 +51,15 @@ void	parse_attr(char **str, int arg_count, t_list **lst, t_flag *flag)
 	*flag = 0;
 	*lst = NULL;
 	i = 0;
-	if (str[0][0] == '-')
-	{
-		i++;
-		while (i < ft_strlen(str[0]))
-		{
-			tmp = chr_to_flag(str[0][i]);
-		}
-	}
-	i = 0;
+	tmp = 1;
 	while (i < arg_count)
 	{
-		//if (str[i][0] == '-' && (tmp = str_to_flag(str[i])))
-		//	*flag |= tmp;
-		//else
-		//	ft_lstadd(lst, ft_lstnew(str[i], ft_strlen(str[i])));
+		if (tmp != 0)
+			tmp = str_to_flag(str[i]);
+		if (tmp != 0)
+			*flag |= tmp;
+		else
+			ft_lstadd(lst, ft_lstnew(str[i], ft_strlen(str[i]) + 1));
 		i++;
 	}
 }

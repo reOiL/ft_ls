@@ -21,6 +21,26 @@ void	pp(t_list *lst)
 	ft_printf("%s\n", ff->filename);
 }
 
+void	pp2(t_list *lst)
+{
+	char *ff = lst->content;
+	if (!ff)
+		return;
+	ft_printf("%s\n", ff);
+}
+
+void	pp3(t_list *lst)
+{
+	char *ff = lst->content;
+	if (!ff)
+		return;
+	ft_printf("%s:\n", ff);
+	t_list *lst2 = get_all_directory(ff);;
+	ft_lstiter(lst2, pp);
+	ft_lstdel(&lst2, (void (*)(void *, size_t)) free_t_file);
+	ft_printf("\n");
+}
+
 int main (int argc, char **argv)
 {
 	t_list *lst;
@@ -30,6 +50,7 @@ int main (int argc, char **argv)
 	if (argc != 1)
 	{
 		parse_attr(argv + 1, argc - 1, &files, &flag);
+		ft_lstiter(files, pp3);
 	}
 	else
 	{
