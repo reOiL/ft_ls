@@ -10,11 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "libft/ft_printf/ft_printf.h"
+#include "ft_ls.h"
+
+void	pp(t_list *lst)
+{
+	t_file *ff = lst->content;
+	if (!ff)
+		return;
+	ft_printf("%s\n", ff->filename);
+}
 
 int main (int argc, char **argv)
 {
-	ft_printf("%i {cyan}%s{eoc}\n", argc, *argv);
+	t_list *lst;
+
+	lst = get_all_directory("..");
+	ft_lstiter(lst, pp);
+	ft_lstdel(&lst, (void (*)(void *, size_t)) free_t_file);
 	return (0);
 }
