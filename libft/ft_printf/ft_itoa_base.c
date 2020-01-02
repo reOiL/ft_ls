@@ -24,7 +24,7 @@ char	cast_base(unsigned short val)
 	char		c;
 
 	c = '0';
-	if (val >= 0 && val <= 9)
+	if (val <= 9)
 		c += val;
 	else if (val >= 10 && val <= 16)
 		c = (val - 10) + 'A';
