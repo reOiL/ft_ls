@@ -10,7 +10,7 @@
 typedef struct		s_file
 {
 	char			*filename;
-	struct stat		s_stat;
+	struct stat		*s_stat;
 	struct s_file	*next;
 }					t_file;
 
@@ -25,6 +25,9 @@ void				*free_t_file(t_file *file, size_t size);
 char				*path_join(char *a, char *b);
 
 //errors.c
-int					print_error(int code, char flag);
+int					print_error(int code, char *str);
+
+//print_l_helper.c
+char				*get_access_rights(struct dirent *dp, struct stat stats);
 
 #endif

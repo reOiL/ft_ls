@@ -47,7 +47,7 @@ int		parse_attr(char **str, int arg_count, t_file **files, t_flag *flag)
 		while (j < ft_strlen(str[i]))
 		{
 			if (!chr_to_flag(str[i][j]))
-				return (print_error(22, str[i][j]));
+				return (print_error(22, str[i]));
 			if (!(*flag & chr_to_flag(str[i][j])))
 				*flag += chr_to_flag(str[i][j]);
 			j++;

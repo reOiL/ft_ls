@@ -15,6 +15,12 @@
 
 typedef size_t	t_flag;
 
+//arg_parser
+t_flag			chr_to_flag(char c);
+t_file			*get_filenames(char **str, int arg_count, int i);
 int				parse_attr(char **str, int arg_count, t_file **lst, t_flag *flag);
+
+//ls_with_l.c
+void			ls_with_l(t_flag flag, t_file *files);
 
 #endif
