@@ -1,37 +1,47 @@
 #include "args.h"
 #include "ft_ls.h"
 
-int			print_fileinfo_l(t_file *subfiles, t_maxlen maxlen, t_flag flag)
+void		sort_files(t_file **files, t_flag flag)
 {
-	char	*fileinfo;
+	if (!(flag & FLAG_a))
+		del_all_hidden(files);
+	/*
+	if (flag & FLAG_t)
+		sort_lst(*files, cmp_flag_a, flag & FLAG_r != 0);
+	 */
+}
+
+int print_fileinfo_l(t_file *subfiles, t_flag flag, char *path)
+{
+	t_maxlen	maxlen;
+	char		*fileinfo;
 
 	fileinfo = NULL;
+	sort_files(&subfiles, flag);
+	ft_printf("total %lld\n", get_blocks(subfiles));
+	maxlen = get_max_lengths(subfiles);
 	while (subfiles)
 	{
 		fileinfo = get_fileinfo(subfiles, maxlen);
-		ft_printf("%s\n", fileinfo);
+		ft_putendl(fileinfo);
 		ft_strdel(&fileinfo);
 		subfiles = subfiles->next;
 	}
 }
 
-int			print_dirfiles(char *dirname, t_flag flag)
+int		print_dirfiles(char *dirname, t_flag flag, char *path)
 {
 	DIR				*dir;
 	struct dirent	*dp;
-	t_maxlen		maxlen;
 	t_file 			*subfiles;
 
 	subfiles = NULL;
 	if(!(dir = opendir(dirname))) //понять как прописывать полный путь
 		return (print_error(13, dirname));
 	while (dp = readdir(dir))
-		add_new_tfile(&subfiles, dp->d_name);
+		add_new_tfile(&subfiles, dp->d_name, path);
 	closedir(dir);
-	ft_printf("total %lld\n", get_blocks(subfiles));
-	//TODO сортировка в зависимости от флага
-	maxlen = get_max_lengths(subfiles);
-	print_fileinfo_l(subfiles, maxlen, flag);
+	print_fileinfo_l(subfiles, flag, path);
 	//if FLAG_R - пройтись этой же функцией по поддиректориям
 }
 
@@ -40,7 +50,7 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 	if (!only_one)
 		ft_printf("./%s:\n", arg_dirs->filename);
 	if (S_ISDIR(arg_dirs->s_stat->st_mode))
-		print_dirfiles(arg_dirs->filename, flag);
+		print_dirfiles(arg_dirs->filename, flag, arg_dirs->filename);
 	/*
 	else
 		добавить вывод для аргумента-файла / аргумента-ссылки

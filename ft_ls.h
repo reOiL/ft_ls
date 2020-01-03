@@ -27,8 +27,8 @@ typedef struct		s_maxlen
 
 //t_file_helper.c
 void				del_tfile(t_file **files);
-t_file				*new_tfile(char *filename);
-void				add_new_tfile(t_file **files, char *filename);
+t_file *new_tfile(char *filename, char *path);
+void add_new_tfile(t_file **files, char *filename, char *path);
 void				del_all_hidden(t_file **files);
 
 //errors.c
@@ -45,4 +45,10 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen);
 //get_fileinfo_2.c
 char 	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks);
 
+// reOiL functions
+char	*path_join(char *a, char *b);
+void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
+
+// comporators.c
+int     cmp_flag_a(t_file *f1, t_file *f2);
 #endif

@@ -5,18 +5,18 @@
 #include "ft_ls.h"
 #include "args.h"
 
-t_flag 	chr_to_flag(char c)
+t_flag	chr_to_flag(char c)
 {
 	if (c == 'l')
-		return FLAG_l;
+		return (FLAG_l);
 	if (c == 'R')
-		return FLAG_R;
+		return (FLAG_R);
 	if (c == 'a')
-		return FLAG_a;
+		return (FLAG_a);
 	if (c == 'r')
-		return FLAG_r;
+		return (FLAG_r);
 	if (c == 't')
-		return FLAG_t;
+		return (FLAG_t);
 	return (0);
 }
 
@@ -27,7 +27,7 @@ t_file	*get_filenames(char **str, int arg_count, int i)
 	files = NULL;
 	while (i < arg_count)
 	{
-		add_new_tfile(&files, str[i]);
+		add_new_tfile(&files, str[i], ".");
 		i++;
 	}
 	return (files);

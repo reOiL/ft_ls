@@ -98,4 +98,3 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 	acrights[9] = (S_IXOTH & file->s_stat->st_mode) ? 'x' : '-';
 	return (get_hard_links(file, maxlen, acrights));
 }
-

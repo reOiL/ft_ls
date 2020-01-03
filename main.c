@@ -23,13 +23,10 @@ int main (int argc, char **argv)
 	if (argc != 1)
 		parse_attr(argv + 1, argc - 1, &files, &flag);
 	if (!files)
-		files = new_tfile(".");
+		files = new_tfile(".", ".");
 	if (flag & FLAG_l)
 		ls_with_l(flag, files);
-	else
-		/* ЭТО ТЕБЕ ГРИШ
-		ls_without_l(flag, files);
-		 */
-	//free все что было здесь
+	//else
+		//ls_without_l(flag, files);
 	return (0);
 }
