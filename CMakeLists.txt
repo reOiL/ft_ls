@@ -97,4 +97,4 @@ add_executable(ft_ls
         l_flag.c
         main.c
         t_file_helper.c
-        utils.c print_l_helper.c)
+        utils.c print_l_helper.c comporators.c)
