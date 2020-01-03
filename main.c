@@ -29,13 +29,22 @@ void	pp2(t_list *lst)
 	ft_printf("%s\n", ff);
 }
 
+int cmp_test(t_list *lst1, t_list *lst2)
+{
+	t_file *f1 = lst1->content;
+	t_file *f2 = lst2->content;
+
+	return ft_strcmp(f1->filename, f2->filename);
+}
+
 void	pp3(t_list *lst)
 {
 	char *ff = lst->content;
 	if (!ff)
 		return;
 	ft_printf("%s:\n", ff);
-	t_list *lst2 = get_all_directory(ff);;
+	t_list *lst2 = get_all_directory(ff);
+	sort_lst(lst2, cmp_test, 0);
 	ft_lstiter(lst2, pp);
 	ft_lstdel(&lst2, (void (*)(void *, size_t)) free_t_file);
 	ft_printf("\n");

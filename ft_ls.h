@@ -15,4 +15,5 @@ t_file	*get_directory_info(char *path);
 t_list	*get_all_directory(char *path);
 void	*free_t_file(t_file *file, size_t size);
 char	*path_join(char *a, char *b);
+void    sort_lst(t_list *lst, int (*cmp)(t_list *, t_list *), int asc);
 #endif
