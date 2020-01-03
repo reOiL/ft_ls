@@ -41,7 +41,7 @@ int		parse_attr(char **str, int arg_count, t_file **files, t_flag *flag)
 	i = 0;
 	*flag = 0;
 	*files = NULL;
-	while (str[i][0] == '-' && i < arg_count)
+	while (i < arg_count && str[i][0] == '-' )
 	{
 		j = 1;
 		while (j < ft_strlen(str[i]))
