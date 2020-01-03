@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 	files = NULL;
 	if (argc != 1)
 		parse_attr(argv + 1, argc - 1, &files, &flag);
-	else
+	if (!files)
 		files = new_tfile(".");
 	if (flag & FLAG_l)
 		ls_with_l(flag, files);
