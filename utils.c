@@ -50,3 +50,30 @@ void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
     	i = i->next;
 	}
 }
+
+void	ft_list_reverse(t_file **begin_list)
+{
+    t_file	*p;
+    t_file	*n;
+
+    p = 0;
+    while (*begin_list)
+    {
+        n = (*begin_list)->next;
+        (*begin_list)->next = p;
+        p = (*begin_list);
+        if (n == 0)
+            return ;
+        (*begin_list) = n;
+    }
+}
+
+char    *get_link_path(char *path)
+{
+    char *mem;
+
+    mem = ft_strnew(1024);
+    if (readlink(path, mem, 1024) < 0)
+        return (NULL);
+    return (mem);
+}
