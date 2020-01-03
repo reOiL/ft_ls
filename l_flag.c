@@ -11,13 +11,15 @@ void		sort_files(t_file **files, t_flag flag)
 	 */
 }
 
-int print_fileinfo_l(t_file *subfiles, t_flag flag, char *path)
+int		print_fileinfo_l(t_file *subfiles, t_flag flag, char *path)
 {
 	t_maxlen	maxlen;
 	char		*fileinfo;
 
 	fileinfo = NULL;
 	sort_files(&subfiles, flag);
+	if (flag & FLAG_R)
+		ft_printf("%s:\n", path);
 	ft_printf("total %lld\n", get_blocks(subfiles));
 	maxlen = get_max_lengths(subfiles);
 	while (subfiles)
@@ -34,6 +36,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	DIR				*dir;
 	struct dirent	*dp;
 	t_file 			*subfiles;
+	t_file			*subdirs;
 
 	subfiles = NULL;
 	if(!(dir = opendir(dirname))) //понять как прописывать полный путь
@@ -42,7 +45,20 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 		add_new_tfile(&subfiles, dp->d_name, path);
 	closedir(dir);
 	print_fileinfo_l(subfiles, flag, path);
+
 	//if FLAG_R - пройтись этой же функцией по поддиректориям
+	if (flag & FLAG_R)
+	{
+		subdirs = del_all_files(subfiles);
+		//free(subfiles);
+		while (subdirs)
+		{
+			ft_putchar('\n');
+			print_dirfiles(subdirs->filename, flag, path_join(path, subdirs->filename));
+			subdirs = subdirs->next;
+		}
+	}
+	free(path);
 }
 
 void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)

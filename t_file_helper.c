@@ -43,35 +43,3 @@ void		add_new_tfile(t_file **files, char *filename, char *path)
 	else
 		*files = new_tfile(filename, path);
 }
-
-void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТРОКАМ
-{
-	t_file		*tmp_prev;
-	t_file		*tmp_next;
-
-	tmp_prev = NULL;
-	tmp_next = *files;
-	while (tmp_next)
-	{
-		if (tmp_next->filename[0] == '.')
-		{
-			if (tmp_prev)
-			{
-				tmp_prev->next = tmp_next->next;
-				del_tfile(&tmp_next);
-				tmp_next = tmp_prev->next;
-			}
-			else
-			{
-				*files = tmp_next->next;
-				del_tfile(&tmp_next);
-				tmp_next = *files;
-			}
-		}
-		else
-		{
-			tmp_prev = tmp_next;
-			tmp_next = tmp_next->next;
-		}
-	}
-}

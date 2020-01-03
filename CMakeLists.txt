@@ -101,4 +101,4 @@ add_executable(ft_ls
         l_flag_helper1.c
         main.c
         t_file_helper.c
-        utils.c)
+        utils.c del_from_lists.c)
