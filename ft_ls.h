@@ -26,7 +26,7 @@ typedef struct		s_maxlen
 
 //t_file_helper.c
 t_file				*new_tfile(char *filename);
-void				add_new_dir(t_file **files, char *filename);
+void				add_new_tfile(t_file **files, char *filename);
 
 //directory.c
 t_file				*get_directory_info(char *path);

@@ -13,14 +13,6 @@
 #include "ft_ls.h"
 #include "args.h"
 
-void	pp(t_list *lst)
-{
-	t_file *ff = lst->content;
-	if (!ff)
-		return;
-	ft_printf("%s\n", ff->filename);
-}
-
 int main (int argc, char **argv)
 {
 	t_file		*files;

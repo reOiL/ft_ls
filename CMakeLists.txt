@@ -92,9 +92,7 @@ add_executable(ft_ls
         libft/libft.h
         arg_parser.c
         args.h
-        directory.c
         errors.c
-        file.c
         ft_ls.h
         l_flag.c
         main.c

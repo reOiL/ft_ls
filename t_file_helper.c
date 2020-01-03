@@ -14,29 +14,20 @@ t_file	*new_tfile(char *filename)
 	return (item);
 }
 
-void	add_new_dir(t_file **files, char *filename)
+void	add_new_tfile(t_file **files, char *filename)
 {
 	t_file		*tmp_prev;
 	t_file		*tmp_next;
-	struct stat	stats;
 
 	tmp_prev = NULL;
 	tmp_next = *files;
-	stat(filename, &stats);
-	//добавить проверку, существует ли файл либо это ссылка. Наверно придется сортировать по st_mode.
-	while (tmp_next && ft_strcmp(tmp_next->filename, filename) < 0 && !(S_ISDIR(stats.st_mode) && !S_ISDIR(tmp_next->s_stat->st_mode)))
+	while (tmp_next)
 	{
 		tmp_prev = tmp_next;
 		tmp_next = tmp_next->next;
 	}
 	if (tmp_prev)
-	{
 		tmp_prev->next = new_tfile(filename);
-		tmp_prev->next->next = tmp_next;
-	}
 	else
-	{
 		*files = new_tfile(filename);
-		(*files)->next = tmp_next;
-	}
 }
