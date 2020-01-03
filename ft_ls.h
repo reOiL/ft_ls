@@ -8,6 +8,7 @@
 # include <errno.h>
 # include <pwd.h>
 # include <grp.h>
+# include <time.h>
 
 typedef struct		s_file
 {
@@ -33,9 +34,15 @@ void				del_all_hidden(t_file **files);
 //errors.c
 int					print_error(int code, char *str);
 
-//print_l_helper.c
+//l_flag_hepler1.c
 t_maxlen			initialize_maxlen(void);
-t_maxlen			get_max_lengths(DIR *dir);
-char				*get_access_rights(struct dirent *dp, struct stat stats);
+t_maxlen			get_max_lengths(t_file *files);
+size_t				get_blocks(t_file *files);
+
+//get_fileinfo_1.c
+char	*get_fileinfo(t_file *file, t_maxlen maxlen);
+
+//get_fileinfo_2.c
+char 	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks);
 
 #endif
