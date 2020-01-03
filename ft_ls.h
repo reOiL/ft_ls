@@ -40,7 +40,7 @@ char				*get_access_rights(struct dirent *dp, struct stat stats);
 
 // reOiL functions
 char	*path_join(char *a, char *b);
-void    sort_lst(t_list *lst, int (*cmp)(t_list *, t_list *), int asc);
+void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
 
 // comporators.c
 int     cmp_flag_a(t_file *f1, t_file *f2);

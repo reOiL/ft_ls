@@ -4,7 +4,6 @@
 
 #include "ft_ls.h"
 
-
 char	*path_join(char *a, char *b)
 {
 	char *str_res;
@@ -16,23 +15,25 @@ char	*path_join(char *a, char *b)
 	return (str_res);
 }
 
-void	lst_data_swap(t_list *lst1, t_list *lst2)
+void	lst_data_swap(t_file *lst1, t_file *lst2)
 {
-	void	*temp;
+    t_file	temp;
 	size_t	c_size;
 
-	temp = lst1->content;
-	c_size = lst1->content_size;
-	lst1->content_size = lst2->content_size;
-	lst1->content = lst2->content;
-	lst2->content_size = c_size;
-	lst2->content = temp;
+	temp.s_stat = lst1->s_stat;
+	temp.filename = lst1->filename;
+
+    lst1->s_stat = lst2->s_stat;
+    lst1->filename = lst2->filename;
+
+    lst2->s_stat = temp.s_stat;
+    lst2->filename = temp.filename;
 }
 
-void    sort_lst(t_list *lst, int (*cmp)(t_list *, t_list *), int asc)
+void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
 {
-    t_list *i;
-    t_list *j;
+    t_file *i;
+    t_file *j;
 
     i = lst;
     while (i->next != NULL)
