@@ -25,14 +25,10 @@ typedef struct		s_maxlen
 }					t_maxlen;
 
 //t_file_helper.c
+void				del_tfile(t_file **files);
 t_file				*new_tfile(char *filename);
 void				add_new_tfile(t_file **files, char *filename);
-
-//directory.c
-t_file				*get_directory_info(char *path);
-t_list				*get_all_directory(char *path);
-void				*free_t_file(t_file *file, size_t size);
-char				*path_join(char *a, char *b);
+void				del_all_hidden(t_file **files);
 
 //errors.c
 int					print_error(int code, char *str);

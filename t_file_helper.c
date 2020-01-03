@@ -1,5 +1,14 @@
 #include "ft_ls.h"
 
+void	del_tfile(t_file **files)
+{
+	if ((*files)->s_stat)
+		free((*files)->s_stat);
+	if ((*files)->filename)
+		free((*files)->filename);
+	free(*files);
+}
+
 t_file	*new_tfile(char *filename)
 {
 	t_file	*item;
@@ -30,4 +39,36 @@ void	add_new_tfile(t_file **files, char *filename)
 		tmp_prev->next = new_tfile(filename);
 	else
 		*files = new_tfile(filename);
+}
+
+void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТРОКАМ
+{
+	t_file		*tmp_prev;
+	t_file		*tmp_next;
+
+	tmp_prev = NULL;
+	tmp_next = *files;
+	while (tmp_next)
+	{
+		if (tmp_next->filename[0] == '.')
+		{
+			if (tmp_prev)
+			{
+				tmp_prev->next = tmp_next->next;
+				del_tfile(&tmp_next);
+				tmp_next = tmp_prev->next;
+			}
+			else
+			{
+				*files = tmp_next->next;
+				del_tfile(&tmp_next);
+				tmp_next = *files;
+			}
+		}
+		else
+		{
+			tmp_prev = tmp_next;
+			tmp_next = tmp_next->next;
+		}
+	}
 }
