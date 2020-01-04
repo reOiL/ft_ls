@@ -28,5 +28,7 @@ int main (int argc, char **argv)
 		ls_with_l(flag, files);
 	//else
 		//ls_without_l(flag, files);
+
+	free_all(&files);
 	return (0);
 }

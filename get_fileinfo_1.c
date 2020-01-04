@@ -7,9 +7,9 @@ char	*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	char	*str;
 
 	i = ft_strlen(acr_hlnks);
-	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_bytes);
+	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_bytes + 1);
 	ft_strcpy(str, acr_hlnks);
-	count_bytes = ft_itoa(file->s_stat->st_size);
+	count_bytes = ft_itoa_base(file->s_stat->st_size, 10);
 	while (maxlen.len_bytes + 1 > ft_strlen(count_bytes))
 	{
 		str[i++] = ' ';
@@ -17,6 +17,7 @@ char	*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	}
 	ft_strcpy(&str[i], count_bytes);
 	ft_strdel(&acr_hlnks);
+	ft_strdel(&count_bytes);
 	return (get_end_line(file, maxlen, str));
 }
 
@@ -27,7 +28,7 @@ char	*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	char	*str;
 
 	i = ft_strlen(acr_hlnks);
-	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_group);
+	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_group + 1);
 	ft_strcpy(str, acr_hlnks);
 	group_name = ft_strdup(getgrgid(file->s_stat->st_gid)->gr_name);
 	while (maxlen.len_group + 1 > ft_strlen(group_name))
@@ -37,6 +38,7 @@ char	*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	}
 	ft_strcpy(&str[i], group_name);
 	ft_strdel(&acr_hlnks);
+	ft_strdel(&group_name);
 	return (get_count_bytes(file, maxlen, str));
 }
 
@@ -47,7 +49,7 @@ char	*get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	char	*str;
 
 	i = ft_strlen(acr_hlnks);
-	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_user);
+	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_user + 1);
 	ft_strcpy(str, acr_hlnks);
 	user_name = ft_strdup(getpwuid(file->s_stat->st_uid)->pw_name);
 	while (maxlen.len_user + 1 > ft_strlen(user_name))
@@ -57,6 +59,7 @@ char	*get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	}
 	ft_strcpy(&str[i], user_name);
 	ft_strdel(&acr_hlnks);
+	ft_strdel(&user_name);
 	return (get_group_name(file, maxlen, str));
 }
 
@@ -67,9 +70,12 @@ char	*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights)
 	char	*str;
 
 	i = ft_strlen(acrights);
-	str = ft_strnew(ft_strlen(acrights) + maxlen.len_hlinks);
+	str = ft_strnew(ft_strlen(acrights) + maxlen.len_hlinks + 1);
+
+	int a = ft_strlen(acrights) + maxlen.len_hlinks;
+
 	ft_strcpy(str, acrights);
-	hardlinks = ft_itoa(file->s_stat->st_nlink);
+	hardlinks = ft_itoa_base(file->s_stat->st_nlink, 10);
 	while (maxlen.len_hlinks + 1 > ft_strlen(hardlinks))
 	{
 		str[i++] = ' ';
@@ -77,7 +83,7 @@ char	*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights)
 	}
 	ft_strcpy(&str[i], hardlinks);
 	ft_strdel(&acrights);
-	//free(hardlinks); //TODO почему дабл фри в этом месте???
+	free(hardlinks);
 	return (get_user_name(file, maxlen, str));
 }
 
@@ -85,8 +91,8 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 {
 	char 	*acrights;
 
-	acrights = ft_strnew(10);// ДОБАВИТЬ ПРОВЕРКУ И ERRNO
-	acrights[0] = (S_IFDIR & file->s_stat->st_mode) ? 'd' : '-'; // ПОТОМ ИЗМЕНИТЬ НА ОТДЕЛЬНУЮ ФУНКЦИЮ
+	acrights = ft_strnew(10);
+	acrights[0] = get_filetype(file);
 	acrights[1] = (S_IRUSR & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[2] = (S_IWUSR & file->s_stat->st_mode) ? 'w' : '-';
 	acrights[3] = (S_IXUSR & file->s_stat->st_mode) ? 'x' : '-';

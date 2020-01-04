@@ -11,6 +11,7 @@ void	del_tfile(t_file **files)
 
 t_file		*new_tfile(char *filename, char *path)
 {
+	char	*full_path;
 	t_file	*item;
 
 	item = (t_file*)malloc(sizeof(t_file));
@@ -19,10 +20,10 @@ t_file		*new_tfile(char *filename, char *path)
 	item->next = NULL;
 	item->filename = ft_strdup(filename);
 	item->s_stat = (struct stat*)malloc(sizeof(struct stat));
-	if (ft_strcmp(path, "."))
-		stat(path_join(path, filename), item->s_stat);
-	else
-		stat(filename, item->s_stat);
+	full_path = ft_strcmp(path, ".") ? path_join(path, filename) : filename;
+	lstat(full_path, item->s_stat);
+	if (ft_strcmp(full_path, filename))
+		ft_strdel(&full_path);
 	return (item);
 }
 

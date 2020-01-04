@@ -45,3 +45,13 @@ size_t		get_blocks(t_file *files)
 	}
 	return (blocks / 2);
 }
+
+void		sort_files(t_file **files, t_flag flag)
+{
+	if (!(flag & FLAG_a))
+		del_all_hidden(files);
+	/*
+	if (flag & FLAG_t)
+		sort_lst(*files, cmp_flag_a, flag & FLAG_r != 0);
+	 */
+}
