@@ -36,6 +36,8 @@ void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
     t_file *j;
 
     i = lst;
+    if (i)
+	{
     while (i->next != NULL)
 	{
     	j = i->next;
@@ -54,6 +56,7 @@ void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
     		j = j->next;
 		}
     	i = i->next;
+	}
 	}
 }
 

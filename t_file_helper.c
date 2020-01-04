@@ -5,9 +5,9 @@ void	del_tfile(t_file **files)
 	if ((*files)->s_stat)
 		free((*files)->s_stat);
 	if ((*files)->filename)
-		free((*files)->filename);
+		ft_strdel(&(*files)->filename);
 	if ((*files)->fullpath)
-		free((*files)->fullpath);
+		ft_strdel(&(*files)->fullpath);
 	free(*files);
 }
 
@@ -36,7 +36,7 @@ void		add_new_tfile(t_file **files, char *filename, char *path)
 	while (tmp_next)
 	{
 		tmp_prev = tmp_next;
-		tmp_next = tmp_next->next;
+		tmp_next = tmp_next->next ? tmp_next->next : NULL;
 	}
 	if (tmp_prev)
 		tmp_prev->next = new_tfile(filename, path);

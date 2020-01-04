@@ -9,19 +9,19 @@ void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТР�
 	tmp_next = *files;
 	while (tmp_next)
 	{
-		if (tmp_next->filename[0] == '.')
+		if (tmp_next->filename[0] && tmp_next->filename[0] == '.')
 		{
 			if (tmp_prev)
 			{
-				tmp_prev->next = tmp_next->next;
+				tmp_prev->next = tmp_next->next ? tmp_next->next : NULL;
 				del_tfile(&tmp_next);
-				tmp_next = tmp_prev->next;
+				tmp_next = tmp_prev->next ? tmp_next->next : NULL;
 			}
 			else
 			{
-				*files = tmp_next->next;
+				*files = tmp_next->next ? tmp_next->next : NULL;
 				del_tfile(&tmp_next);
-				tmp_next = *files;
+				tmp_next = *files ? *files : NULL;
 			}
 		}
 		else
@@ -41,7 +41,7 @@ void		del_all_files(t_file **files)
 	tmp_next = *files;
 	while (tmp_next)
 	{
-		if (!S_ISDIR(tmp_next->s_stat->st_mode))
+		if (!S_ISDIR(tmp_next->s_stat->st_mode) || !ft_strcmp(tmp_next->filename, ".") || !ft_strcmp(tmp_next->filename, ".."))
 		{
 			if (tmp_prev)
 			{
@@ -51,9 +51,9 @@ void		del_all_files(t_file **files)
 			}
 			else
 			{
-				*files = tmp_next->next;
+				*files = tmp_next->next ? tmp_next->next : NULL;
 				del_tfile(&tmp_next);
-				tmp_next = *files;
+				tmp_next = *files ? *files : NULL;
 			}
 		}
 		else
@@ -68,7 +68,7 @@ void		free_all(t_file **files)
 {
 	t_file	*tmp;
 
-	while (*files)
+	while (*files && files)
 	{
 		tmp = (*files)->next;
 		del_tfile(files);
