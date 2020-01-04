@@ -16,7 +16,8 @@
 # define FLAG_r		0x8
 # define FLAG_t		0x10
 
-typedef size_t		t_flag;
+typedef size_t			t_flag;
+typedef struct dirent	t_dirent;
 
 typedef struct		s_file
 {
@@ -41,7 +42,8 @@ char				get_sixth_acright(t_file *file);
 char				get_ninth_acright(t_file *file);
 
 // comporators.c - потом изменить название)
-int					cmp_flag_a(t_file *f1, t_file *f2);
+int					cmp_flag_t(t_file *f1, t_file *f2);
+int					cmp_flag_ascii(t_file *f1, t_file *f2);
 
 //del_from_lists
 void				del_all_hidden(t_file **files);
@@ -77,5 +79,8 @@ void 				add_new_tfile(t_file **files, char *filename, char *path);
 char				*path_join(char *a, char *b);
 void				lst_data_swap(t_file *lst1, t_file *lst2);
 void				sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
+int					is_dir(t_file *file);
 
+//ls_without_l.c
+void				ls_without_l(t_flag flag, t_file *arg_dirs);
 #endif

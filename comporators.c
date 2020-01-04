@@ -4,14 +4,16 @@
 
 #include "ft_ls.h"
 
-int cmp_flag_a(t_file *f1, t_file *f2)
+int cmp_flag_t(t_file *f1, t_file *f2)
 {
-    long long   a;
-
-    a = f1->s_stat->st_ctimespec.tv_sec - f2->s_stat->st_ctimespec.tv_sec;
-    if (a > 0)
+    if (f1->s_stat->st_mtimespec.tv_sec > f2->s_stat->st_mtimespec.tv_sec)
         return (1);
-    if (a < 0)
+    if (f1->s_stat->st_mtimespec.tv_sec < f2->s_stat->st_mtimespec.tv_sec)
         return (-1);
     return (0);
+}
+
+int cmp_flag_ascii(t_file *f1, t_file *f2)
+{
+	return (strcmp(f1->filename, f2->filename));
 }

@@ -41,10 +41,16 @@ void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
     	j = i->next;
     	while (j != NULL)
 		{
-    		if (asc == 1 && cmp(i, j) > 0)
-				lst_data_swap(i, j);
-    		else if (cmp(i, j) < 0)
-				lst_data_swap(i, j);
+    		if (asc == 1)
+			{
+    			if (cmp(i, j) > 0)
+					lst_data_swap(i, j);
+			}
+    		else
+			{
+    			if(cmp(i, j) < 0)
+					lst_data_swap(i, j);
+			}
     		j = j->next;
 		}
     	i = i->next;
@@ -76,4 +82,11 @@ char    *get_link_path(char *path)
     if (readlink(path, mem, 1024) < 0)
         return (NULL);
     return (mem);
+}
+
+int 	is_dir(t_file *file)
+{
+	if (!file)
+		return (-1);
+	return (S_ISDIR(file->s_stat->st_mode));
 }

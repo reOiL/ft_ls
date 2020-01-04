@@ -52,6 +52,6 @@ void		sort_files(t_file **files, t_flag flag)
 		del_all_hidden(files);
 	/*
 	if (flag & FLAG_t)
-		sort_lst(*files, cmp_flag_a, flag & FLAG_r != 0);
+		sort_lst(*files, cmp_flag_t, flag & FLAG_r != 0);
 	 */
 }
