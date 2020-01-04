@@ -23,12 +23,16 @@ void		print_dir(t_flag flag, t_file *file)
 	}
 	closedir(dir);
 	if ((flag & FLAG_t))
-		sort_lst(subfiles, cmp_flag_t, 0);
+		sort_lst(subfiles, cmp_flag_t, flag & FLAG_r ? 1 : 0);
 	else
 		sort_lst(subfiles, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
 	subfiles_iter = subfiles;
 	while (subfiles_iter)
 	{
+		time_t t = subfiles_iter->s_stat->st_mtimespec.tv_sec;
+		struct tm lt;
+		localtime_r(&t, &lt);
+		ft_printf("%i:%02i ", lt.tm_hour, lt.tm_min);
 		if (is_dir(subfiles_iter))
 			ft_printf("{cyan}%s{eoc}\n", subfiles_iter->filename);
 		else

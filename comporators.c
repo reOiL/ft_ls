@@ -7,10 +7,10 @@
 int cmp_flag_t(t_file *f1, t_file *f2)
 {
     if (f1->s_stat->st_mtimespec.tv_sec > f2->s_stat->st_mtimespec.tv_sec)
-        return (1);
+		return (1);
     if (f1->s_stat->st_mtimespec.tv_sec < f2->s_stat->st_mtimespec.tv_sec)
         return (-1);
-    return (0);
+    return (-cmp_flag_ascii(f1, f2));
 }
 
 int cmp_flag_ascii(t_file *f1, t_file *f2)
