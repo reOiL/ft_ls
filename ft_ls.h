@@ -21,6 +21,7 @@ typedef size_t		t_flag;
 typedef struct		s_file
 {
 	char			*filename;
+	char			*fullpath;
 	struct stat		*s_stat;
 	struct s_file	*next;
 }					t_file;
@@ -32,6 +33,12 @@ typedef struct		s_maxlen
 	unsigned int	len_user;
 	unsigned int	len_bytes;
 }					t_maxlen;
+
+//acrights_helper.c
+char				get_filetype(t_file *file);
+char				get_third_acright(t_file *file);
+char				get_sixth_acright(t_file *file);
+char				get_ninth_acright(t_file *file);
 
 // comporators.c - потом изменить название)
 int					cmp_flag_a(t_file *f1, t_file *f2);
@@ -52,7 +59,7 @@ char				*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights);
 char				*get_fileinfo(t_file *file, t_maxlen maxlen);
 
 //get_fileinfo_2.c
-char				get_filetype(t_file *file);
+char				*add_linkway(t_file *file, char *str);
 char				*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks);
 
 //l_flag_helper1.c

@@ -95,12 +95,12 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 	acrights[0] = get_filetype(file);
 	acrights[1] = (S_IRUSR & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[2] = (S_IWUSR & file->s_stat->st_mode) ? 'w' : '-';
-	acrights[3] = (S_IXUSR & file->s_stat->st_mode) ? 'x' : '-';
+	acrights[3] = get_third_acright(file);// s-бит
 	acrights[4] = (S_IRGRP & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[5] = (S_IWGRP & file->s_stat->st_mode) ? 'w' : '-';
-	acrights[6] = (S_IXGRP & file->s_stat->st_mode) ? 'x' : '-';
+	acrights[6] = get_sixth_acright(file);// s-бит
 	acrights[7] = (S_IROTH & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[8] = (S_IWOTH & file->s_stat->st_mode) ? 'w' : '-';
-	acrights[9] = (S_IXOTH & file->s_stat->st_mode) ? 'x' : '-';
+	acrights[9] = get_ninth_acright(file);// t-бит
 	return (get_hard_links(file, maxlen, acrights));
 }

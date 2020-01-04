@@ -1,20 +1,22 @@
 #include "ft_ls.h"
 
-char	get_filetype(t_file *file)
+char	*add_linkway(t_file *file, char *str)
 {
-	if (S_ISLNK(file->s_stat->st_mode))
-		return ('l');
-	if (S_ISDIR(file->s_stat->st_mode))
-		return ('d');
-	if (S_ISSOCK(file->s_stat->st_mode))
-		return ('s');
-	if (S_ISBLK(file->s_stat->st_mode))
-		return ('b');
-	if (S_ISCHR(file->s_stat->st_mode))
-		return ('c');
-	if (S_ISFIFO(file->s_stat->st_mode))
-		return ('p');
-	return ('-');
+	char			*str_link;
+	char 			*full_str;
+	char			*end_str;
+	char 			*end_and_link;
+
+	str_link = ft_strnew(1000);
+	readlink(file->fullpath, str_link, 1000);
+	end_str = ft_strdup(" -> ");
+	end_and_link = ft_strjoin(end_str, str_link);
+	ft_strdel(&end_str);
+	ft_strdel(&str_link);
+	full_str = ft_strjoin(str, end_and_link);
+	ft_strdel(&str);
+	ft_strdel(&end_and_link);
+	return (full_str);
 }
 
 char 	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks)
@@ -30,5 +32,7 @@ char 	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp)] = ' ';
 	ft_strcpy(&str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp) + 1], file->filename);
 	ft_strdel(&acr_hlnks);
+	if (S_ISLNK(file->s_stat->st_mode))
+		str = add_linkway(file, str);
 	return (str);
 }

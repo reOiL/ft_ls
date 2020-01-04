@@ -70,12 +70,8 @@ void		free_all(t_file **files)
 
 	while (*files)
 	{
-		if ((*files)->filename)
-			free((*files)->filename);
-		if ((*files)->s_stat)
-			free((*files)->s_stat);
 		tmp = (*files)->next;
-		free(*files);
+		del_tfile(files);
 		*files = tmp;
 	}
 }
