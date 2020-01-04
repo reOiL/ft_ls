@@ -8,10 +8,20 @@
 # include <errno.h>
 # include <pwd.h>
 # include <grp.h>
+# include <time.h>
+
+# define FLAG_l		0x1
+# define FLAG_R		0x2
+# define FLAG_a		0x4
+# define FLAG_r		0x8
+# define FLAG_t		0x10
+
+typedef size_t		t_flag;
 
 typedef struct		s_file
 {
 	char			*filename;
+	char			*fullpath;
 	struct stat		*s_stat;
 	struct s_file	*next;
 }					t_file;
@@ -24,24 +34,48 @@ typedef struct		s_maxlen
 	unsigned int	len_bytes;
 }					t_maxlen;
 
-//t_file_helper.c
-void				del_tfile(t_file **files);
-t_file				*new_tfile(char *filename);
-void				add_new_tfile(t_file **files, char *filename);
+//acrights_helper.c
+char				get_filetype(t_file *file);
+char				get_third_acright(t_file *file);
+char				get_sixth_acright(t_file *file);
+char				get_ninth_acright(t_file *file);
+
+// comporators.c - потом изменить название)
+int					cmp_flag_a(t_file *f1, t_file *f2);
+
+//del_from_lists
 void				del_all_hidden(t_file **files);
+void 				del_all_files(t_file **files);
+void				free_all(t_file **files);
 
 //errors.c
 int					print_error(int code, char *str);
 
-//print_l_helper.c
+//get_fileinfo_1.c
+char				*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks);
+char				*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks);
+char				*get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks);
+char				*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights);
+char				*get_fileinfo(t_file *file, t_maxlen maxlen);
+
+//get_fileinfo_2.c
+char				*add_linkway(t_file *file, char *str);
+char				*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks);
+
+//l_flag_helper1.c
 t_maxlen			initialize_maxlen(void);
-t_maxlen			get_max_lengths(DIR *dir);
-char				*get_access_rights(struct dirent *dp, struct stat stats);
+t_maxlen			get_max_lengths(t_file *files);
+size_t				get_blocks(t_file *files);
+void				sort_files(t_file **files, t_flag flag);
 
-// reOiL functions
-char	*path_join(char *a, char *b);
-void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
+//t_file_helper.c
+void				del_tfile(t_file **files);
+t_file 				*new_tfile(char *filename, char *path);
+void 				add_new_tfile(t_file **files, char *filename, char *path);
 
-// comporators.c
-int     cmp_flag_a(t_file *f1, t_file *f2);
+// utils.c
+char				*path_join(char *a, char *b);
+void				lst_data_swap(t_file *lst1, t_file *lst2);
+void				sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
+
 #endif

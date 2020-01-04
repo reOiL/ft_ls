@@ -27,7 +27,7 @@ t_file	*get_filenames(char **str, int arg_count, int i)
 	files = NULL;
 	while (i < arg_count)
 	{
-		add_new_tfile(&files, str[i]);
+		add_new_tfile(&files, str[i], ".");
 		i++;
 	}
 	return (files);

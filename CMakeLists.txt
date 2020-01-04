@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
 project(ft_ls C)
 
 set(CMAKE_C_STANDARD 11)
@@ -92,9 +92,13 @@ add_executable(ft_ls
         libft/libft.h
         arg_parser.c
         args.h
+        comporators.c
         errors.c
         ft_ls.h
+        get_fileinfo_1.c
+        get_fileinfo_2.c
         l_flag.c
+        l_flag_helper1.c
         main.c
         t_file_helper.c
-        utils.c print_l_helper.c comporators.c)
+        utils.c del_from_lists.c acrights_helper.c)
