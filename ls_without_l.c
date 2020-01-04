@@ -5,7 +5,7 @@
 #include "ft_ls.h"
 
 
-void		print_dir(t_flag flag, t_file *file)
+void		print_dir(t_flag flag, t_file *file, char *fullpath)
 {
 	DIR			*dir;
 	t_dirent	*dp;
@@ -13,8 +13,8 @@ void		print_dir(t_flag flag, t_file *file)
 	t_file		*subfiles_iter;
 
 	subfiles = NULL;
-	if (!(dir = opendir(file->filename)))
-		return ;
+	if (!(dir = opendir(fullpath == NULL ? file->filename : fullpath)))
+		return ; //TODO: delete fullpath
 	while ((dp = readdir(dir)))
 	{
 		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
@@ -27,18 +27,30 @@ void		print_dir(t_flag flag, t_file *file)
 	else
 		sort_lst(subfiles, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
 	subfiles_iter = subfiles;
+	if (fullpath)
+		ft_printf("\n%s:\n", fullpath);
 	while (subfiles_iter)
 	{
-		time_t t = subfiles_iter->s_stat->st_mtimespec.tv_sec;
-		struct tm lt;
-		localtime_r(&t, &lt);
-		ft_printf("%i:%02i ", lt.tm_hour, lt.tm_min);
 		if (is_dir(subfiles_iter))
 			ft_printf("{cyan}%s{eoc}\n", subfiles_iter->filename);
 		else
 			ft_printf("%s\n", subfiles_iter->filename);
 		subfiles_iter = subfiles_iter->next;
 	}
+	if (flag & FLAG_R)
+	{
+		subfiles_iter = subfiles;
+		while (subfiles_iter)
+		{
+			if (is_dir(subfiles_iter))
+			{
+				print_dir(flag, subfiles_iter, path_join(fullpath ? fullpath : file->filename, subfiles_iter->filename));
+			}
+			subfiles_iter = subfiles_iter->next;
+		}
+	}
+	if (fullpath)
+		ft_strdel(&fullpath);
 	del_all_files(&subfiles);
 }
 
@@ -51,7 +63,7 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 		if (is_dir(arg_dirs) <= 0)
 			ft_printf("%s\n", arg_dirs->filename);
 		else
-			print_dir(flag, arg_dirs);
+			print_dir(flag, arg_dirs, NULL);
 		arg_dirs = arg_dirs->next;
 	}
 }
