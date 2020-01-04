@@ -40,7 +40,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	subfiles = NULL;
 	if(!(dir = opendir(path))) //понять как прописывать полный путь
 		return (print_error(13, path));
-	while (dp = readdir(dir))
+	while ((dp = readdir(dir)))
 		add_new_tfile(&subfiles, dp->d_name, path);
 	closedir(dir);
 	print_fileinfo_l(subfiles, flag, path);
