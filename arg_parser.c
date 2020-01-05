@@ -52,8 +52,11 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 		while (j < ft_strlen(str[i]))
 		{
 			if (!chr_to_flag(str[i][j]))
-				return (print_error(22, &str[i][j]));
-			if (!(flag & chr_to_flag(str[i][j])))
+			{
+				print_error(22, &str[i][j]);
+				exit(0);
+			}
+			else
 				flag |= chr_to_flag(str[i][j]);
 			j++;
 		}
