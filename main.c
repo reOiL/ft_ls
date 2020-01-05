@@ -25,8 +25,10 @@ int main (int argc, char **argv)
 	if (argc != 1)
 		parse_attr(argv + 1, argc - 1, &files, &dirs);
 	if (!files)
-		files = new_tfile(".", ".");
-	sort_lst(files, cmp_file_type, 1);
+		dirs = new_tfile(".", ".");
+	sort_by_flag(dirs, flag);
+	sort_by_flag(files, flag);
+	push_new_tfile(&files, dirs);
 	if (flag & FLAG_l)
 		ls_with_l(flag, files);
 	else

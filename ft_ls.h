@@ -81,6 +81,7 @@ void 				add_new_tfile(t_file **files, char *filename, char *path);
 char				*path_join(char *a, char *b);
 void				lst_data_swap(t_file *lst1, t_file *lst2);
 void				sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
+void				sort_by_flag(t_file *lst, t_flag flag);
 int					is_dir(t_file *file);
 
 //ls_without_l.c

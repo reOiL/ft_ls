@@ -92,3 +92,11 @@ int 	is_dir(t_file *file)
 		return (-1);
 	return (S_ISDIR(file->s_stat->st_mode));
 }
+
+void	sort_by_flag(t_file *lst, t_flag flag)
+{
+	if ((flag & FLAG_t))
+		sort_lst(lst, cmp_flag_t, flag & FLAG_r ? 1 : 0);
+	else
+		sort_lst(lst, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
+}

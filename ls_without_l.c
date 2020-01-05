@@ -5,7 +5,7 @@
 #include "ft_ls.h"
 
 
-void		print_dir(t_flag flag, t_file *file, char *fullpath)
+void		print_dir(t_flag flag, t_file *file, char *fullpath, int is_many)
 {
 	DIR			*dir;
 	t_dirent	*dp;
@@ -22,13 +22,10 @@ void		print_dir(t_flag flag, t_file *file, char *fullpath)
 		add_new_tfile(&subfiles, dp->d_name, fullpath ? fullpath : ".");
 	}
 	closedir(dir);
-	if ((flag & FLAG_t))
-		sort_lst(subfiles, cmp_flag_t, flag & FLAG_r ? 1 : 0);
-	else
-		sort_lst(subfiles, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
+	sort_by_flag(subfiles, flag);
 	subfiles_iter = subfiles;
-	if (fullpath)
-		ft_printf("\n%s:\n", fullpath);
+	if (is_many)
+		ft_printf("\n%s:\n", file->filename);
 	while (subfiles_iter)
 	{
 		if (is_dir(subfiles_iter))
@@ -44,7 +41,7 @@ void		print_dir(t_flag flag, t_file *file, char *fullpath)
 		{
 			if (is_dir(subfiles_iter))
 			{
-				print_dir(flag, subfiles_iter, path_join(fullpath ? fullpath : file->filename, subfiles_iter->filename));
+				print_dir(flag, subfiles_iter, path_join(fullpath ? fullpath : file->filename, subfiles_iter->filename), 1);
 			}
 			subfiles_iter = subfiles_iter->next;
 		}
@@ -56,6 +53,9 @@ void		print_dir(t_flag flag, t_file *file, char *fullpath)
 
 void		ls_without_l(t_flag flag, t_file *arg_dirs)
 {
+	int is_many;
+
+	is_many = arg_dirs->next != NULL;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat))
@@ -63,7 +63,7 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 		if (is_dir(arg_dirs) <= 0)
 			ft_printf("%s\n", arg_dirs->filename);
 		else
-			print_dir(flag, arg_dirs, NULL);
+			print_dir(flag, arg_dirs, NULL, is_many);
 		arg_dirs = arg_dirs->next;
 	}
 }
