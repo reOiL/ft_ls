@@ -19,7 +19,7 @@ void		print_dir(t_flag flag, t_file *file, char *fullpath)
 	{
 		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
 			continue;
-		add_new_tfile(&subfiles, dp->d_name, file->filename);
+		add_new_tfile(&subfiles, dp->d_name, fullpath ? fullpath : ".");
 	}
 	closedir(dir);
 	if ((flag & FLAG_t))
