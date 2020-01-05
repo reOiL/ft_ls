@@ -3,7 +3,7 @@
 //
 
 #include "ft_ls.h"
-
+#include <errno.h>
 
 void		print_dir(t_flag flag, t_file *file, int is_many)
 {
@@ -14,7 +14,12 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 
 	subfiles = NULL;
 	if (!(dir = opendir(file->fullpath)))
+	{
+		if (is_many)
+			ft_printf("\n%s:\n", file->fullpath);
+		print_error(EACCES, file->filename);
 		return ;
+	}
 	while ((dp = readdir(dir)))//75
 	{
 		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
