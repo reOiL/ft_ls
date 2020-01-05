@@ -22,12 +22,15 @@ void	lst_data_swap(t_file *lst1, t_file *lst2)
 
 	temp.s_stat = lst1->s_stat;
 	temp.filename = lst1->filename;
+	temp.fullpath = lst1->fullpath;
 
     lst1->s_stat = lst2->s_stat;
     lst1->filename = lst2->filename;
+    lst1->fullpath = lst2->fullpath;
 
     lst2->s_stat = temp.s_stat;
     lst2->filename = temp.filename;
+    lst2->fullpath = temp.fullpath;
 }
 
 void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
