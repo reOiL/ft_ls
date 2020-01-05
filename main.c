@@ -23,7 +23,7 @@ int main (int argc, char **argv)
 	files = NULL;
 	dirs = NULL;
 	if (argc != 1)
-		parse_attr(argv + 1, argc - 1, &files, &dirs);
+		flag = parse_attr(argv + 1, argc - 1, &files, &dirs);
 	if (!files)
 		dirs = new_tfile(".", ".");
 	sort_by_flag(dirs, flag);
