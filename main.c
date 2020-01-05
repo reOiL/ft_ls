@@ -16,14 +16,17 @@
 int main (int argc, char **argv)
 {
 	t_file		*files;
+	t_file		*dirs;
 	size_t		flag;
 
 	flag = 0;
 	files = NULL;
+	dirs = NULL;
 	if (argc != 1)
-		parse_attr(argv + 1, argc - 1, &files, &flag);
+		parse_attr(argv + 1, argc - 1, &files, &dirs);
 	if (!files)
 		files = new_tfile(".", ".");
+	sort_lst(files, cmp_file_type, 1);
 	if (flag & FLAG_l)
 		ls_with_l(flag, files);
 	else

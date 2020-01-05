@@ -44,6 +44,7 @@ char				get_ninth_acright(t_file *file);
 // comporators.c - потом изменить название)
 int					cmp_flag_t(t_file *f1, t_file *f2);
 int					cmp_flag_ascii(t_file *f1, t_file *f2);
+int					cmp_file_type(t_file *f1, t_file *f2);
 
 //del_from_lists
 void				del_all_hidden(t_file **files);
@@ -73,6 +74,7 @@ void				sort_files(t_file **files, t_flag flag);
 //t_file_helper.c
 void				del_tfile(t_file **files);
 t_file 				*new_tfile(char *filename, char *path);
+void				push_new_tfile(t_file **files, t_file *new_files);
 void 				add_new_tfile(t_file **files, char *filename, char *path);
 
 // utils.c
