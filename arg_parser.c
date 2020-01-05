@@ -3,7 +3,6 @@
 //
 
 #include "ft_ls.h"
-#include "args.h"
 
 t_flag	chr_to_flag(char c)
 {
@@ -50,13 +49,17 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 	i = 0;
 	flag = 0;
 	*files = NULL;
+	//TODO: check for minus
 	while (i < arg_count && str[i][0] == '-' )
 	{
 		j = 1;
 		while (j < ft_strlen(str[i]))
 		{
 			if (!chr_to_flag(str[i][j]))
-				return (print_error(22, &str[i][j]));
+			{
+				print_error(22, &str[i][j]);
+				exit(-1);
+			}
 			flag |= chr_to_flag(str[i][j]);
 			j++;
 		}

@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТРОКАМ
+void		del_all_files(t_file **files)
 {
 	t_file		*tmp_prev;
 	t_file		*tmp_next;
@@ -9,19 +9,19 @@ void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТР�
 	tmp_next = *files;
 	while (tmp_next)
 	{
-		if (tmp_next->filename[0] == '.')
+		if (!S_ISDIR(tmp_next->s_stat->st_mode) || !ft_strcmp(tmp_next->filename, ".") || !ft_strcmp(tmp_next->filename, ".."))
 		{
 			if (tmp_prev)
 			{
 				tmp_prev->next = tmp_next->next;
 				del_tfile(&tmp_next);
-				tmp_next = tmp_prev->next;
+				tmp_next = tmp_prev->next ? tmp_prev->next : NULL;
 			}
 			else
 			{
-				*files = tmp_next->next;
+				*files = tmp_next->next ? tmp_next->next : NULL;
 				del_tfile(&tmp_next);
-				tmp_next = *files;
+				tmp_next = *files ? *files : NULL;
 			}
 		}
 		else
@@ -32,19 +32,11 @@ void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТР�
 	}
 }
 
-void		del_all_files(t_file **files)
-{
-	if (*files == NULL)
-		return ;
-	del_all_files(&(*files)->next);
-	del_tfile(files);
-}
-
 void		free_all(t_file **files)
 {
 	t_file	*tmp;
 
-	while (*files)
+	while (files && *files)
 	{
 		tmp = (*files)->next;
 		del_tfile(files);

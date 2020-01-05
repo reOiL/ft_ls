@@ -38,6 +38,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 	}
 	if (flag & FLAG_R)
 	{
+		del_all_files(&subfiles);
 		subfiles_iter = subfiles;
 		while (subfiles_iter)
 		{

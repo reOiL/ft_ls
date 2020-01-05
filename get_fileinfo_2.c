@@ -22,16 +22,20 @@ char	*add_linkway(t_file *file, char *str)
 char 	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 {
 	char	*time_stamp;
+	char 	*needed_time;
 	char	*str;
 
 	time_stamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
-	str = ft_strnew(ft_strlen(acr_hlnks) + 1 + ft_strlen(time_stamp) + ft_strlen(file->filename));
+	needed_time = ft_strnew(14);
+	ft_strncpy(needed_time, &time_stamp[4], 13);
+	str = ft_strnew(ft_strlen(acr_hlnks) + 15 + ft_strlen(file->filename));
 	ft_strcpy(str, acr_hlnks);
 	str[ft_strlen(acr_hlnks)] = ' ';
-	ft_strcpy(&str[ft_strlen(acr_hlnks) + 1], time_stamp);
-	str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp)] = ' ';
-	ft_strcpy(&str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp) + 1], file->filename);
+	ft_strcpy(&str[ft_strlen(acr_hlnks) + 1], needed_time);
+	str[ft_strlen(acr_hlnks) + ft_strlen(needed_time)] = ' ';
+	ft_strcpy(&str[ft_strlen(acr_hlnks) + ft_strlen(needed_time) + 1], file->filename);
 	ft_strdel(&acr_hlnks);
+	ft_strdel(&needed_time);
 	if (S_ISLNK(file->s_stat->st_mode))
 		str = add_linkway(file, str);
 	return (str);

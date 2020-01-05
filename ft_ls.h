@@ -9,6 +9,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
+# include <sys/xattr.h>
 
 # define FLAG_l		0x1
 # define FLAG_R		(FLAG_l << 1)
@@ -42,6 +43,7 @@ char				get_filetype(t_file *file);
 char				get_third_acright(t_file *file);
 char				get_sixth_acright(t_file *file);
 char				get_ninth_acright(t_file *file);
+char				get_extended_attr(t_file *file);
 
 // comporators.c - потом изменить название)
 int					cmp_flag_t(t_file *f1, t_file *f2);
