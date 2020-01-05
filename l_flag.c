@@ -8,7 +8,7 @@ int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path)
 
 	sort_files(subfiles, flag);
 	if (flag & FLAG_R)
-		ft_printf("%s:\n", path);
+		ft_printf("%s:\n", (*subfiles)->fullpath);
 	ft_printf("total %lld\n", get_blocks(*subfiles));
 	maxlen = get_max_lengths(*subfiles);
 	tmp = *subfiles;
@@ -26,7 +26,7 @@ int		print_files_links(char *filename, t_flag flag, char *path)
 	t_file		*file;
 
 	add_new_tfile(&file, filename, path);
-	print_fileinfo_l(file, flag, path);
+	print_fileinfo_l(&file, flag, path);
 	free_all(&file);
 }
 
@@ -84,12 +84,6 @@ void		ls_with_l(t_flag flag, t_file *arg_dirs)
 	int 	only_one;
 
 	only_one = arg_dirs->next ? 0 : 1;
-	/* Отсортировать в зависимости от флагов и сначала файлы потом папки
-	if (flag & FLAG_r)
-		sort_back(&arg_dirs);
-	else if (flag & FLAG_t)
-		sort_by_time(&arg_dirs);
-	*/
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat))

@@ -43,3 +43,13 @@ char 	get_ninth_acright(t_file *file)
 		return ('x');
 	return ('-');
 }
+
+char 	get_extended_attr(t_file *file)
+{
+	char 	*acl;
+
+	acl = ft_strnew(100);
+	if (listxattr(file->fullpath, acl, 100, 0) && !S_ISLNK(file->s_stat->st_mode))
+		return ('@');
+	return (' ');
+}

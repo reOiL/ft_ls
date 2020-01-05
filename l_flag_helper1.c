@@ -43,15 +43,15 @@ size_t		get_blocks(t_file *files)
 		blocks += files->s_stat->st_blocks;
 		files = files->next;
 	}
-	return (blocks / 2);
+	return (blocks);
 }
 
 void		sort_files(t_file **files, t_flag flag)
 {
-	if (!(flag & FLAG_a))
-		del_all_hidden(files);
-	/*
-	if (flag & FLAG_t)
-		sort_lst(*files, cmp_flag_t, flag & FLAG_r != 0);
-	 */
+	//if (!(flag & FLAG_a))
+		//del_all_hidden(files);
+	if ((flag & FLAG_t))
+		sort_lst(*files, cmp_flag_t, flag & FLAG_r ? 1 : 0);
+	else
+		sort_lst(*files, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
 }

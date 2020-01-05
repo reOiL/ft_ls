@@ -9,7 +9,7 @@ void	del_all_hidden(t_file **files) //ПОТОМ УКОРОТИТЬ ПО СТР�
 	tmp_next = *files;
 	while (tmp_next)
 	{
-		if (tmp_next->filename[0] && tmp_next->filename[0] == '.')
+		if (tmp_next->filename && tmp_next->filename[0] == '.')
 		{
 			if (tmp_prev)
 			{

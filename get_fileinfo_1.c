@@ -7,10 +7,10 @@ char	*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	char	*str;
 
 	i = ft_strlen(acr_hlnks);
-	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_bytes + 1);
+	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_bytes + 2);
 	ft_strcpy(str, acr_hlnks);
 	count_bytes = ft_itoa_base(file->s_stat->st_size, 10);
-	while (maxlen.len_bytes + 1 > ft_strlen(count_bytes))
+	while (maxlen.len_bytes + 2 > ft_strlen(count_bytes))
 	{
 		str[i++] = ' ';
 		maxlen.len_bytes--;
@@ -28,10 +28,10 @@ char	*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	char	*str;
 
 	i = ft_strlen(acr_hlnks);
-	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_group + 1);
+	str = ft_strnew(ft_strlen(acr_hlnks) + maxlen.len_group + 2);
 	ft_strcpy(str, acr_hlnks);
 	group_name = ft_strdup(getgrgid(file->s_stat->st_gid)->gr_name);
-	while (maxlen.len_group + 1 > ft_strlen(group_name))
+	while (maxlen.len_group + 2 > ft_strlen(group_name))
 	{
 		str[i++] = ' ';
 		maxlen.len_group--;
@@ -91,7 +91,7 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 {
 	char 	*acrights;
 
-	acrights = ft_strnew(10);
+	acrights = ft_strnew(11);
 	acrights[0] = get_filetype(file);
 	acrights[1] = (S_IRUSR & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[2] = (S_IWUSR & file->s_stat->st_mode) ? 'w' : '-';
@@ -102,5 +102,6 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 	acrights[7] = (S_IROTH & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[8] = (S_IWOTH & file->s_stat->st_mode) ? 'w' : '-';
 	acrights[9] = get_ninth_acright(file);// t-бит
+	acrights[10] = get_extended_attr(file);
 	return (get_hard_links(file, maxlen, acrights));
 }
