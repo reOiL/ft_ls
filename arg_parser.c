@@ -19,6 +19,8 @@ t_flag	chr_to_flag(char c)
 		return (FLAG_t);
 	if (c == 'f')
 		return (FLAG_f | FLAG_a);
+	if (c == 'd')
+		return (FLAG_d);
 	return (0);
 }
 

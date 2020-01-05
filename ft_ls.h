@@ -11,11 +11,12 @@
 # include <time.h>
 
 # define FLAG_l		0x1
-# define FLAG_R		0x2
-# define FLAG_a		0x4
-# define FLAG_r		0x8
-# define FLAG_t		0x10
-# define FLAG_f		0x20
+# define FLAG_R		(FLAG_l << 1)
+# define FLAG_a		(FLAG_l << 2)
+# define FLAG_r		(FLAG_l << 3)
+# define FLAG_t		(FLAG_l << 4)
+# define FLAG_f		(FLAG_l << 5)
+# define FLAG_d		(FLAG_l << 6)
 
 typedef size_t			t_flag;
 typedef struct dirent	t_dirent;
@@ -87,6 +88,7 @@ void				sort_by_flag(t_file *lst, t_flag flag);
 int					is_dir(t_file *file);
 int					is_link(t_file *file);
 int					is_exec(t_file *file);
+void				print_file_name(t_file *file, t_flag flag);
 
 //ls_without_l.c
 void				ls_without_l(t_flag flag, t_file *arg_dirs);

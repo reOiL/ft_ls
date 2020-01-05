@@ -114,8 +114,20 @@ void	sort_by_flag(t_file *lst, t_flag flag)
 {
 	if ((flag & FLAG_t))
 		sort_lst(lst, cmp_flag_t, flag & FLAG_r ? 1 : 0);
-	else if ((flag & FLAG_f))
+	else if ((flag & FLAG_f) && !(flag & FLAG_d))
 		sort_lst(lst, cmp_flag_f, flag & FLAG_r ? 0 : 1);
-	else
+	else if (!(flag & FLAG_d))
 		sort_lst(lst, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
+}
+
+void	print_file_name(t_file *file, t_flag flag)
+{
+	if (is_dir(file))
+		ft_printf("\e[1m{cyan}%s{eoc}\n", file->filename);
+	else if (is_link(file))
+		ft_printf("\e[1m{magenta}%s{eoc}\n", file->filename);
+	else if (is_exec(file))
+		ft_printf("{red}%s{eoc}\n", file->filename);
+	else
+		ft_printf("%s\n", file->filename);
 }

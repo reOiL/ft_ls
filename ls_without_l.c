@@ -33,14 +33,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		ft_printf("\n%s:\n", file->fullpath);
 	while (subfiles_iter)
 	{
-		if (is_dir(subfiles_iter))
-			ft_printf("\e[1m{cyan}%s{eoc}\n", subfiles_iter->filename);
-		else if (is_link(subfiles_iter))
-			ft_printf("\e[1m{magenta}%s{eoc}\n", subfiles_iter->filename);
-		else if (is_exec(subfiles_iter))
-			ft_printf("{red}%s{eoc}\n", subfiles_iter->filename);
-		else
-			ft_printf("%s\n", subfiles_iter->filename);
+		print_file_name(subfiles_iter, flag);
 		subfiles_iter = subfiles_iter->next;
 	}
 	if (flag & FLAG_R)
@@ -67,8 +60,8 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 	{
 		if (!(arg_dirs->s_stat))
 			print_error(2, arg_dirs->filename);
-		if (is_dir(arg_dirs) <= 0)
-			ft_printf("%s\n", arg_dirs->filename);
+		if (is_dir(arg_dirs) <= 0 || flag & FLAG_d)
+			print_file_name(arg_dirs, flag);
 		else
 			print_dir(flag, arg_dirs, is_many);
 		arg_dirs = arg_dirs->next;
