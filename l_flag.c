@@ -7,10 +7,6 @@ int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path)
 	t_file		*tmp;
 
 	sort_files(subfiles, flag);
-	if (flag & FLAG_R)
-		ft_printf("%s:\n", path);
-	if (S_ISDIR((*subfiles)->s_stat->st_mode))
-		ft_printf("total %lld\n", get_blocks(*subfiles));
 	maxlen = get_max_lengths(*subfiles);
 	tmp = *subfiles;
 	while (tmp)
@@ -49,6 +45,10 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 		add_new_tfile(&subfiles, dp->d_name, path);
 	}
 	closedir(dir);
+	if (flag & FLAG_R)
+		ft_printf("%s:\n", path);
+	if (subfiles)
+		ft_printf("total %lld\n", get_blocks(subfiles));
 	print_fileinfo_l(&subfiles, flag, path);
 
 	tmp = subfiles;
