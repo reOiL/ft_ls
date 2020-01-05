@@ -55,7 +55,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 			subfiles_iter = subfiles_iter->next;
 		}
 	}
-	del_all_files(&subfiles);
+	free_all(&subfiles);
 }
 
 void		ls_without_l(t_flag flag, t_file *arg_dirs)

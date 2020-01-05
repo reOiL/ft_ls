@@ -15,6 +15,7 @@
 # define FLAG_a		0x4
 # define FLAG_r		0x8
 # define FLAG_t		0x10
+# define FLAG_f		0x20
 
 typedef size_t			t_flag;
 typedef struct dirent	t_dirent;
@@ -45,6 +46,7 @@ char				get_ninth_acright(t_file *file);
 int					cmp_flag_t(t_file *f1, t_file *f2);
 int					cmp_flag_ascii(t_file *f1, t_file *f2);
 int					cmp_file_type(t_file *f1, t_file *f2);
+int					cmp_flag_f(t_file *f1, t_file *f2);
 
 //del_from_lists
 void				del_all_hidden(t_file **files);

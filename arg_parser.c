@@ -17,6 +17,8 @@ t_flag	chr_to_flag(char c)
 		return (FLAG_r);
 	if (c == 't')
 		return (FLAG_t);
+	if (c == 'f')
+		return (FLAG_f | FLAG_a);
 	return (0);
 }
 
@@ -53,8 +55,7 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 		{
 			if (!chr_to_flag(str[i][j]))
 				return (print_error(22, &str[i][j]));
-			if (!(flag & chr_to_flag(str[i][j])))
-				flag |= chr_to_flag(str[i][j]);
+			flag |= chr_to_flag(str[i][j]);
 			j++;
 		}
 		i++;

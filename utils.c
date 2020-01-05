@@ -114,6 +114,8 @@ void	sort_by_flag(t_file *lst, t_flag flag)
 {
 	if ((flag & FLAG_t))
 		sort_lst(lst, cmp_flag_t, flag & FLAG_r ? 1 : 0);
+	else if ((flag & FLAG_f))
+		sort_lst(lst, cmp_flag_f, flag & FLAG_r ? 0 : 1);
 	else
 		sort_lst(lst, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
 }
