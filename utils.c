@@ -96,6 +96,20 @@ int 	is_dir(t_file *file)
 	return (S_ISDIR(file->s_stat->st_mode));
 }
 
+int 	is_link(t_file *file)
+{
+	if (!file)
+		return (-1);
+	return (S_ISLNK(file->s_stat->st_mode));
+}
+
+int 	is_exec(t_file *file)
+{
+	if (!file)
+		return (-1);
+	return (file->s_stat->st_mode & S_IXUSR);
+}
+
 void	sort_by_flag(t_file *lst, t_flag flag)
 {
 	if ((flag & FLAG_t))

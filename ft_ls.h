@@ -83,6 +83,8 @@ void				lst_data_swap(t_file *lst1, t_file *lst2);
 void				sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
 void				sort_by_flag(t_file *lst, t_flag flag);
 int					is_dir(t_file *file);
+int					is_link(t_file *file);
+int					is_exec(t_file *file);
 
 //ls_without_l.c
 void				ls_without_l(t_flag flag, t_file *arg_dirs);
