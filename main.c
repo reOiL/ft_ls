@@ -13,18 +13,17 @@
 #include "ft_ls.h"
 #include "args.h"
 
-int main (int argc, char **argv)
-{
-	t_file		*files;
-	t_file		*dirs;
-	size_t		flag;
+int main (int argc, char **argv) {
+	t_file *files;
+	t_file *dirs;
+	size_t flag;
 
 	flag = 0;
 	files = NULL;
 	dirs = NULL;
 	if (argc != 1)
-		parse_attr(argv + 1, argc - 1, &files, &dirs);
-	if (!files)
+		flag = parse_attr(argv + 1, argc - 1, &files, &dirs);
+	if (!dirs)
 		dirs = new_tfile(".", ".");
 	sort_by_flag(dirs, flag);
 	sort_by_flag(files, flag);
@@ -35,5 +34,6 @@ int main (int argc, char **argv)
 		ls_without_l(flag, files);
 
 	free_all(&files);
+	//free_all(&dirs);
 	return (0);
 }

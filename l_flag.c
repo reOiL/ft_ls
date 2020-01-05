@@ -8,8 +8,9 @@ int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path)
 
 	sort_files(subfiles, flag);
 	if (flag & FLAG_R)
-		ft_printf("%s:\n", (*subfiles)->fullpath);
-	ft_printf("total %lld\n", get_blocks(*subfiles));
+		ft_printf("%s:\n", path);
+	if (S_ISDIR((*subfiles)->s_stat->st_mode))
+		ft_printf("total %lld\n", get_blocks(*subfiles));
 	maxlen = get_max_lengths(*subfiles);
 	tmp = *subfiles;
 	while (tmp)
@@ -25,6 +26,7 @@ int		print_files_links(char *filename, t_flag flag, char *path)
 {
 	t_file		*file;
 
+	file = NULL;
 	add_new_tfile(&file, filename, path);
 	print_fileinfo_l(&file, flag, path);
 	free_all(&file);
@@ -41,7 +43,11 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	if(!(dir = opendir(path))) //понять как прописывать полный путь
 		return (print_error(13, path));
 	while ((dp = readdir(dir)))
+	{
+		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
+			continue;
 		add_new_tfile(&subfiles, dp->d_name, path);
+	}
 	closedir(dir);
 	print_fileinfo_l(&subfiles, flag, path);
 
@@ -76,7 +82,11 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 			ft_putchar('\n');
 	}
 	else
+	{
 		print_files_links(arg_dirs->filename, flag, ".");
+		if (arg_dirs->next && S_ISDIR(arg_dirs->next->s_stat->st_mode))
+			ft_putchar('\n');
+	}
 }
 
 void		ls_with_l(t_flag flag, t_file *arg_dirs)
@@ -86,7 +96,7 @@ void		ls_with_l(t_flag flag, t_file *arg_dirs)
 	only_one = arg_dirs->next ? 0 : 1;
 	while (arg_dirs)
 	{
-		if (!(arg_dirs->s_stat))
+		if (!(arg_dirs->s_stat->st_mode))
 			print_error(2, arg_dirs->filename);
 		else
 			print_files_l(flag, arg_dirs, only_one);
