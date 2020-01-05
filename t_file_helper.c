@@ -26,6 +26,16 @@ t_file		*new_tfile(char *filename, char *path)
 	return (item);
 }
 
+void		push_new_tfile(t_file **files, t_file *new_files)
+{
+	if (*files == NULL)
+	{
+		*files = new_files;
+		return ;
+	}
+	push_new_tfile(&(*files)->next, new_files);
+}
+
 void		add_new_tfile(t_file **files, char *filename, char *path)
 {
 	t_file		*tmp_prev;

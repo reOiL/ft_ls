@@ -9,8 +9,8 @@
 
 //arg_parser
 t_flag			chr_to_flag(char c);
-t_file			*get_filenames(char **str, int arg_count, int i);
-int				parse_attr(char **str, int arg_count, t_file **lst, t_flag *flag);
+void			get_filenames(char **str, int arg_count, t_file **files, t_file **dirs);
+t_flag			parse_attr(char **str, int arg_count, t_file **files, t_file **dirs);
 
 //l_flag.c
 int				print_fileinfo_l(t_file **subfiles, t_flag flag, char *path);

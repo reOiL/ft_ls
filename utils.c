@@ -22,12 +22,15 @@ void	lst_data_swap(t_file *lst1, t_file *lst2)
 
 	temp.s_stat = lst1->s_stat;
 	temp.filename = lst1->filename;
+	temp.fullpath = lst1->fullpath;
 
     lst1->s_stat = lst2->s_stat;
     lst1->filename = lst2->filename;
+    lst1->fullpath = lst2->fullpath;
 
     lst2->s_stat = temp.s_stat;
     lst2->filename = temp.filename;
+    lst2->fullpath = temp.fullpath;
 }
 
 void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
@@ -35,6 +38,8 @@ void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
     t_file *i;
     t_file *j;
 
+    if (!lst)
+		return ;
     i = lst;
     if (i)
 	{
@@ -92,4 +97,12 @@ int 	is_dir(t_file *file)
 	if (!file)
 		return (-1);
 	return (S_ISDIR(file->s_stat->st_mode));
+}
+
+void	sort_by_flag(t_file *lst, t_flag flag)
+{
+	if ((flag & FLAG_t))
+		sort_lst(lst, cmp_flag_t, flag & FLAG_r ? 1 : 0);
+	else
+		sort_lst(lst, cmp_flag_ascii, flag & FLAG_r ? 0 : 1);
 }
