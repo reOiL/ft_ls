@@ -1,5 +1,5 @@
 #include "ft_ls.h"
-
+//TODO: check print error
 int 	print_error(int code, char *str)
 {
 	if (code == EINVAL)
