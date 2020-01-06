@@ -43,9 +43,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		while (subfiles_iter)
 		{
 			if (is_dir(subfiles_iter))
-			{
 				print_dir(flag, subfiles_iter, 1);
-			}
 			subfiles_iter = subfiles_iter->next;
 		}
 	}

@@ -42,11 +42,11 @@ void		push_new_tfile(t_file **files, t_file *new_files)
 	if (*files == NULL)
 	{
 		*files = new_files;
-		if ((*files)->len == NULL)
-			(*files)->len = ft_memalloc(sizeof(size_t));
-		if ((*files)->max_filename_l)
-			(*files)->max_filename_l = ft_memalloc(sizeof(size_t));
-		(*(*files)->len) += 1;
+		//if ((*files)->len == NULL)
+		//	(*files)->len = ft_memalloc(sizeof(size_t));
+		//if ((*files)->max_filename_l)
+		//	(*files)->max_filename_l = ft_memalloc(sizeof(size_t));
+		//(*(*files)->len) += 1;
 		return ;
 	}
 	push_new_tfile(&(*files)->next, new_files);
