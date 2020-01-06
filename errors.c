@@ -18,7 +18,7 @@ int		print_error(int code, char *str)
 	{
 		ft_putstr_fd("ft_ls: illegal option -- ", 2);
 		ft_putchar_fd(str[0], 2);
-		ft_putendl_fd("\nUsage: ./ft_ls -[adgGfltrRu] [file ...]", 2);
+		ft_putendl_fd("\nUsage: ./ft_ls -[adGfltrRu] [file ...]", 2);
 		exit(-1);
 	}
 	else
