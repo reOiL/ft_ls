@@ -20,6 +20,8 @@ t_flag	chr_to_flag(char c)
 		return (FLAG_f | FLAG_a);
 	if (c == 'd')
 		return (FLAG_d);
+	if (c == 'G')
+		return (FLAG_G);
 	return (0);
 }
 

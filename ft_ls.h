@@ -18,6 +18,7 @@
 # define FLAG_t		(FLAG_l << 4)
 # define FLAG_f		(FLAG_l << 5)
 # define FLAG_d		(FLAG_l << 6)
+# define FLAG_G		(FLAG_l << 7)
 
 typedef size_t			t_flag;
 typedef struct dirent	t_dirent;
