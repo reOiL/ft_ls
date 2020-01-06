@@ -25,14 +25,17 @@ void	lst_data_swap(t_file *lst1, t_file *lst2)
 	temp.s_stat = lst1->s_stat;
 	temp.filename = lst1->filename;
 	temp.fullpath = lst1->fullpath;
+	temp.max_filename_l = lst1->max_filename_l;
 
     lst1->s_stat = lst2->s_stat;
     lst1->filename = lst2->filename;
     lst1->fullpath = lst2->fullpath;
+    lst1->max_filename_l = lst2->max_filename_l;
 
     lst2->s_stat = temp.s_stat;
     lst2->filename = temp.filename;
     lst2->fullpath = temp.fullpath;
+    lst2->max_filename_l = temp.max_filename_l;
 }
 
 void    sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc)
@@ -128,11 +131,11 @@ void	sort_by_flag(t_file *lst, t_flag flag)
 void	print_file_name(t_file *file, t_flag flag)
 {
 	if (is_dir(file))
-		ft_printf("\e[1m{cyan}%s{eoc}\n", file->filename);
+		ft_printf("\e[1m{cyan}");
 	else if (is_link(file))
-		ft_printf("\e[1m{magenta}%s{eoc}\n", file->filename);
+		ft_printf("\e[1m{magenta}");
 	else if (is_exec(file))
-		ft_printf("{red}%s{eoc}\n", file->filename);
-	else
-		ft_printf("%s\n", file->filename);
+		ft_printf("{red}");
+	ft_printf("%-*s", *file->max_filename_l + 1, file->filename);
+	ft_printf("{eoc}");
 }

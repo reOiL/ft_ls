@@ -24,7 +24,7 @@ int main (int argc, char **argv) {
 	if (argc != 1)
 		flag = parse_attr(argv + 1, argc - 1, &files, &dirs);
 	if (!dirs)
-		dirs = new_tfile(".", ".");
+		add_new_tfile(&dirs, ".", ".");
 	sort_by_flag(dirs, flag);
 	sort_by_flag(files, flag);
 	push_new_tfile(&files, dirs);

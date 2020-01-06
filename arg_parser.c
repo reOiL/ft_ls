@@ -33,9 +33,10 @@ void			get_filenames(char **str, int arg_count, t_file **files, t_file **dirs)
 	{
 		fl = new_tfile(str[i], ".");
 		if (is_dir(fl))
-			push_new_tfile(dirs, fl);
+			add_new_tfile(dirs, str[i], ".");
 		else
-			push_new_tfile(files, fl);
+			add_new_tfile(files, str[i], ".");
+		del_tfile(&fl);
 		i++;
 	}
 }

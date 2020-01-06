@@ -28,6 +28,8 @@ typedef struct		s_file
 	char			*fullpath;
 	struct stat		*s_stat;
 	struct s_file	*next;
+	size_t 			*max_filename_l;
+	size_t 			*len;
 }					t_file;
 
 typedef struct		s_maxlen
