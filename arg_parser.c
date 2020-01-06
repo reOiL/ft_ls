@@ -1,31 +1,40 @@
-//
-// Created by Johnny Webber on 02/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 12:39:16 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/06 12:41:51 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
 t_flag	chr_to_flag(char c)
 {
 	if (c == 'l')
-		return (FLAG_l);
+		return (FLAG_L);
 	if (c == 'R')
-		return (FLAG_R);
+		return (FLAG_REC);
 	if (c == 'a')
-		return (FLAG_a);
+		return (FLAG_A);
 	if (c == 'r')
-		return (FLAG_r);
+		return (FLAG_R);
 	if (c == 't')
-		return (FLAG_t);
+		return (FLAG_T);
 	if (c == 'f')
-		return (FLAG_f | FLAG_a);
+		return (FLAG_F | FLAG_A);
 	if (c == 'd')
-		return (FLAG_d);
+		return (FLAG_D);
 	return (0);
 }
 
-void			get_filenames(char **str, int arg_count, t_file **files, t_file **dirs)
+void	get_filenames(char **str, int arg_count, \
+		t_file **files, t_file **dirs)
 {
-	int 	i;
+	int		i;
 	t_file	*fl;
 
 	i = 0;
@@ -46,11 +55,11 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 	int		j;
 	t_flag flag;
 
+	//check for minus!
 	i = 0;
 	flag = 0;
 	*files = NULL;
-	//TODO: check for minus
-	while (i < arg_count && str[i][0] == '-' )
+	while (i < arg_count && str[i][0] == '-')
 	{
 		j = 1;
 		while (j < ft_strlen(str[i]))
@@ -66,6 +75,6 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 		i++;
 	}
 	if (i != arg_count)
-		get_filenames(str + i, arg_count - i, files, dirs); //взять все файлы
+		get_filenames(str + i, arg_count - i, files, dirs);
 	return (flag);
 }

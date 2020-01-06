@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -84,8 +84,6 @@ all: cmake_check_build_system
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/eblackbu/ft_ls/CMakeFiles 0
 .PHONY : all
-
-re: clean all
 
 # The main clean target
 clean:
@@ -313,33 +311,6 @@ get_fileinfo_2.s: get_fileinfo_2.c.s
 get_fileinfo_2.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/get_fileinfo_2.c.s
 .PHONY : get_fileinfo_2.c.s
-
-l_flag.o: l_flag.c.o
-
-.PHONY : l_flag.o
-
-# target to build an object file
-l_flag.c.o:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/l_flag.c.o
-.PHONY : l_flag.c.o
-
-l_flag.i: l_flag.c.i
-
-.PHONY : l_flag.i
-
-# target to preprocess a source file
-l_flag.c.i:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/l_flag.c.i
-.PHONY : l_flag.c.i
-
-l_flag.s: l_flag.c.s
-
-.PHONY : l_flag.s
-
-# target to generate assembly for a file
-l_flag.c.s:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/l_flag.c.s
-.PHONY : l_flag.c.s
 
 l_flag_helper1.o: l_flag_helper1.c.o
 
@@ -2474,6 +2445,33 @@ libft/get_next_line.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/libft/get_next_line.c.s
 .PHONY : libft/get_next_line.c.s
 
+ls_with_l.o: ls_with_l.c.o
+
+.PHONY : ls_with_l.o
+
+# target to build an object file
+ls_with_l.c.o:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/ls_with_l.c.o
+.PHONY : ls_with_l.c.o
+
+ls_with_l.i: ls_with_l.c.i
+
+.PHONY : ls_with_l.i
+
+# target to preprocess a source file
+ls_with_l.c.i:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/ls_with_l.c.i
+.PHONY : ls_with_l.c.i
+
+ls_with_l.s: ls_with_l.c.s
+
+.PHONY : ls_with_l.s
+
+# target to generate assembly for a file
+ls_with_l.c.s:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/ls_with_l.c.s
+.PHONY : ls_with_l.c.s
+
 ls_without_l.o: ls_without_l.c.o
 
 .PHONY : ls_without_l.o
@@ -2612,9 +2610,6 @@ help:
 	@echo "... get_fileinfo_2.o"
 	@echo "... get_fileinfo_2.i"
 	@echo "... get_fileinfo_2.s"
-	@echo "... l_flag.o"
-	@echo "... l_flag.i"
-	@echo "... l_flag.s"
 	@echo "... l_flag_helper1.o"
 	@echo "... l_flag_helper1.i"
 	@echo "... l_flag_helper1.s"
@@ -2852,6 +2847,9 @@ help:
 	@echo "... libft/get_next_line.o"
 	@echo "... libft/get_next_line.i"
 	@echo "... libft/get_next_line.s"
+	@echo "... ls_with_l.o"
+	@echo "... ls_with_l.i"
+	@echo "... ls_with_l.s"
 	@echo "... ls_without_l.o"
 	@echo "... ls_without_l.i"
 	@echo "... ls_without_l.s"

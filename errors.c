@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 12:49:05 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/06 12:49:33 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
-//TODO: check print error
-int 	print_error(int code, char *str)
+
+int		print_error(int code, char *str)
 {
 	if (code == EINVAL)
 	{

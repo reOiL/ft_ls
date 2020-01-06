@@ -36,7 +36,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	t_file			*tmp;
 
 	subfiles = NULL;
-	if (flag & FLAG_R)
+	if (flag & FLAG_REC)
 		ft_printf("%s:\n", path);
 	if(!(dir = opendir(path)))
 	{
@@ -45,7 +45,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	}
 	while ((dp = readdir(dir)))
 	{
-		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
+		if (!(flag & FLAG_A) && dp->d_name[0] == '.')
 			continue;
 		add_new_tfile(&subfiles, dp->d_name, path);
 	}
@@ -55,8 +55,8 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	print_fileinfo_l(&subfiles, flag, path);
 
 	tmp = subfiles;
-	//if FLAG_R - пройтись этой же функцией по поддиректориям Вынести в отдельную функцию
-	if (flag & FLAG_R)
+	//if FLAG_REC - пройтись этой же функцией по поддиректориям Вынести в отдельную функцию
+	if (flag & FLAG_REC)
 	{
 		del_all_files(&subfiles);
 		tmp = subfiles;
@@ -96,7 +96,7 @@ void		ls_with_l(t_flag flag, t_file *arg_dirs)
 {
 	int 	only_one;
 
-	only_one = (arg_dirs->next && !(flag & FLAG_R)) ? 0 : 1;
+	only_one = (arg_dirs->next && !(flag & FLAG_REC)) ? 0 : 1;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat->st_mode))

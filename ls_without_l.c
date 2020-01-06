@@ -22,7 +22,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 	}
 	while ((dp = readdir(dir)))//75
 	{
-		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
+		if (!(flag & FLAG_A) && dp->d_name[0] == '.')
 			continue;
 		add_new_tfile(&subfiles, dp->d_name, file->fullpath);
 	}
@@ -36,7 +36,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		print_file_name(subfiles_iter, flag);
 		subfiles_iter = subfiles_iter->next;
 	}
-	if (flag & FLAG_R)
+	if (flag & FLAG_REC)
 	{
 		del_all_files(&subfiles);
 		subfiles_iter = subfiles;
@@ -61,7 +61,7 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 	{
 		if (!(arg_dirs->s_stat))
 			print_error(2, arg_dirs->filename);
-		if (is_dir(arg_dirs) <= 0 || flag & FLAG_d)
+		if (is_dir(arg_dirs) <= 0 || flag & FLAG_D)
 			print_file_name(arg_dirs, flag);
 		else
 			print_dir(flag, arg_dirs, is_many);

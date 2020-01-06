@@ -28,7 +28,7 @@ int main (int argc, char **argv) {
 	sort_by_flag(dirs, flag);
 	sort_by_flag(files, flag);
 	push_new_tfile(&files, dirs);
-	if (flag & FLAG_l)
+	if (flag & FLAG_L)
 		ls_with_l(flag, files);
 	else
 		ls_without_l(flag, files);
