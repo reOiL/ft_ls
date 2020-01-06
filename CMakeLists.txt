@@ -97,7 +97,7 @@ add_executable(ft_ls
         ft_ls.h
         get_fileinfo_1.c
         get_fileinfo_2.c
-        l_flag.c
+        ls_with_l.c
         l_flag_helper1.c
         main.c
         t_file_helper.c

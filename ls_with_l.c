@@ -36,8 +36,13 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	t_file			*tmp;
 
 	subfiles = NULL;
-	if(!(dir = opendir(path))) //понять как прописывать полный путь
-		return (print_error(13, path));
+	if (flag & FLAG_R)
+		ft_printf("%s:\n", path);
+	if(!(dir = opendir(path)))
+	{
+		ft_strdel(&path);
+		return (print_error(13, dirname));
+	}
 	while ((dp = readdir(dir)))
 	{
 		if (!(flag & FLAG_a) && dp->d_name[0] == '.')
@@ -45,8 +50,6 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 		add_new_tfile(&subfiles, dp->d_name, path);
 	}
 	closedir(dir);
-	if (flag & FLAG_R)
-		ft_printf("%s:\n", path);
 	if (subfiles)
 		ft_printf("total %lld\n", get_blocks(subfiles));
 	print_fileinfo_l(&subfiles, flag, path);
@@ -93,7 +96,7 @@ void		ls_with_l(t_flag flag, t_file *arg_dirs)
 {
 	int 	only_one;
 
-	only_one = arg_dirs->next ? 0 : 1;
+	only_one = (arg_dirs->next && !(flag & FLAG_R)) ? 0 : 1;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat->st_mode))
