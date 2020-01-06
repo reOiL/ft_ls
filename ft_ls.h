@@ -88,6 +88,7 @@ char				*path_join(char *a, char *b);
 void				lst_data_swap(t_file *lst1, t_file *lst2);
 void				sort_lst(t_file *lst, int (*cmp)(t_file *, t_file *), int asc);
 void				sort_by_flag(t_file *lst, t_flag flag);
+int					is_spec_dir(t_file *file);
 int					is_dir(t_file *file);
 int					is_link(t_file *file);
 int					is_exec(t_file *file);
