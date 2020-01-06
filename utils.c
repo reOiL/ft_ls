@@ -4,13 +4,12 @@
 
 #include "ft_ls.h"
 
-char	*path_join(char *a, char *b)
-{
+char	*path_join(char *a, char *b) {
 	char *str_res;
 	char *tmp;
 
 	if (a && a[ft_strlen(a) - 1] == '/')
-		return ft_strdup(a);
+		return (ft_strjoin(a, b));
 	tmp = ft_strjoin(a != NULL ? a : "", a != NULL ? "/" : "");
 	str_res = ft_strjoin(tmp, b != NULL ? b : "");
 	ft_strdel(&tmp);

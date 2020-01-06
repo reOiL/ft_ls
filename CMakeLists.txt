@@ -90,15 +90,18 @@ add_executable(ft_ls
         libft/get_next_line.c
         libft/get_next_line.h
         libft/libft.h
+        acrights_helper.c
         arg_parser.c
         args.h
         comporators.c
+        del_from_lists.c
         errors.c
         ft_ls.h
         get_fileinfo_1.c
         get_fileinfo_2.c
-        ls_with_l.c
         l_flag_helper1.c
+        ls_with_l.c
+        ls_without_l.c
         main.c
         t_file_helper.c
-        utils.c del_from_lists.c acrights_helper.c ls_without_l.c)
+        utils.c)

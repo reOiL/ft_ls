@@ -102,6 +102,6 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 	acrights[7] = (S_IROTH & file->s_stat->st_mode) ? 'r' : '-';
 	acrights[8] = (S_IWOTH & file->s_stat->st_mode) ? 'w' : '-';
 	acrights[9] = get_ninth_acright(file);// t-бит
-	acrights[10] = get_extended_attr(file);
+	acrights[10] = ' ';
 	return (get_hard_links(file, maxlen, acrights));
 }

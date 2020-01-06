@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path)
+int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path, int only_one)
 {
 	t_maxlen	maxlen;
 	char		*fileinfo;
@@ -24,11 +24,11 @@ int		print_files_links(char *filename, t_flag flag, char *path)
 
 	file = NULL;
 	add_new_tfile(&file, filename, path);
-	print_fileinfo_l(&file, flag, path);
+	print_fileinfo_l(&file, flag, path, 0);
 	free_all(&file);
 }
 
-int		print_dirfiles(char *dirname, t_flag flag, char *path)
+int print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 {
 	DIR				*dir;
 	struct dirent	*dp;
@@ -52,7 +52,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 	closedir(dir);
 	if (subfiles)
 		ft_printf("total %lld\n", get_blocks(subfiles));
-	print_fileinfo_l(&subfiles, flag, path);
+	print_fileinfo_l(&subfiles, flag, path, 0);
 
 	tmp = subfiles;
 	//if FLAG_REC - пройтись этой же функцией по поддиректориям Вынести в отдельную функцию
@@ -65,7 +65,7 @@ int		print_dirfiles(char *dirname, t_flag flag, char *path)
 			if (is_dir(subfiles))
 			{
 				ft_putchar('\n');
-				print_dirfiles(subfiles->filename, flag, path_join(path, subfiles->filename));
+				print_dirfiles(subfiles->filename, flag, path_join(path, subfiles->filename), 0);
 			}
 			subfiles = subfiles->next;
 		}
@@ -80,7 +80,7 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 		ft_printf("%s:\n", arg_dirs->fullpath);
 	if (S_ISDIR(arg_dirs->s_stat->st_mode))
 	{
-		print_dirfiles(arg_dirs->filename, flag, ft_strdup(arg_dirs->filename));
+		print_dirfiles(arg_dirs->filename, flag, ft_strdup(arg_dirs->filename), only_one);
 		if (!only_one && arg_dirs->next)
 			ft_putchar('\n');
 	}

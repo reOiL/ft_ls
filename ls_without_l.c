@@ -20,7 +20,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		print_error(EACCES, file->filename);
 		return ;
 	}
-	while ((dp = readdir(dir)))//75
+	while ((dp = readdir(dir)))
 	{
 		if (!(flag & FLAG_A) && dp->d_name[0] == '.')
 			continue;

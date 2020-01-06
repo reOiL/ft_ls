@@ -56,6 +56,7 @@ char	get_ninth_acright(t_file *file)
 	return ('-');
 }
 
+/*
 char	get_extended_attr(t_file *file)
 {
 	char	*acl;
@@ -70,3 +71,4 @@ char	get_extended_attr(t_file *file)
 	ft_strdel(&acl);
 	return (c);
 }
+*/
