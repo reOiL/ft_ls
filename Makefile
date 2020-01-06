@@ -177,32 +177,32 @@ arg_parser.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/arg_parser.c.s
 .PHONY : arg_parser.c.s
 
-comporators.o: comporators.c.o
+comparators.o: comparators.c.o
 
-.PHONY : comporators.o
+.PHONY : comparators.o
 
 # target to build an object file
-comporators.c.o:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comporators.c.o
-.PHONY : comporators.c.o
+comparators.c.o:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators.c.o
+.PHONY : comparators.c.o
 
-comporators.i: comporators.c.i
+comparators.i: comparators.c.i
 
-.PHONY : comporators.i
+.PHONY : comparators.i
 
 # target to preprocess a source file
-comporators.c.i:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comporators.c.i
-.PHONY : comporators.c.i
+comparators.c.i:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators.c.i
+.PHONY : comparators.c.i
 
-comporators.s: comporators.c.s
+comparators.s: comparators.c.s
 
-.PHONY : comporators.s
+.PHONY : comparators.s
 
 # target to generate assembly for a file
-comporators.c.s:
-	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comporators.c.s
-.PHONY : comporators.c.s
+comparators.c.s:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators.c.s
+.PHONY : comparators.c.s
 
 del_from_lists.o: del_from_lists.c.o
 
@@ -2526,6 +2526,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/main.c.s
 .PHONY : main.c.s
 
+rec_flag_helper.o: rec_flag_helper.c.o
+
+.PHONY : rec_flag_helper.o
+
+# target to build an object file
+rec_flag_helper.c.o:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/rec_flag_helper.c.o
+.PHONY : rec_flag_helper.c.o
+
+rec_flag_helper.i: rec_flag_helper.c.i
+
+.PHONY : rec_flag_helper.i
+
+# target to preprocess a source file
+rec_flag_helper.c.i:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/rec_flag_helper.c.i
+.PHONY : rec_flag_helper.c.i
+
+rec_flag_helper.s: rec_flag_helper.c.s
+
+.PHONY : rec_flag_helper.s
+
+# target to generate assembly for a file
+rec_flag_helper.c.s:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/rec_flag_helper.c.s
+.PHONY : rec_flag_helper.c.s
+
 t_file_helper.o: t_file_helper.c.o
 
 .PHONY : t_file_helper.o
@@ -2580,6 +2607,33 @@ utils.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/utils.c.s
 .PHONY : utils.c.s
 
+utils2.o: utils2.c.o
+
+.PHONY : utils2.o
+
+# target to build an object file
+utils2.c.o:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/utils2.c.o
+.PHONY : utils2.c.o
+
+utils2.i: utils2.c.i
+
+.PHONY : utils2.i
+
+# target to preprocess a source file
+utils2.c.i:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/utils2.c.i
+.PHONY : utils2.c.i
+
+utils2.s: utils2.c.s
+
+.PHONY : utils2.s
+
+# target to generate assembly for a file
+utils2.c.s:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/utils2.c.s
+.PHONY : utils2.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2595,9 +2649,9 @@ help:
 	@echo "... arg_parser.o"
 	@echo "... arg_parser.i"
 	@echo "... arg_parser.s"
-	@echo "... comporators.o"
-	@echo "... comporators.i"
-	@echo "... comporators.s"
+	@echo "... comparators.o"
+	@echo "... comparators.i"
+	@echo "... comparators.s"
 	@echo "... del_from_lists.o"
 	@echo "... del_from_lists.i"
 	@echo "... del_from_lists.s"
@@ -2856,12 +2910,18 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... rec_flag_helper.o"
+	@echo "... rec_flag_helper.i"
+	@echo "... rec_flag_helper.s"
 	@echo "... t_file_helper.o"
 	@echo "... t_file_helper.i"
 	@echo "... t_file_helper.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"
+	@echo "... utils2.o"
+	@echo "... utils2.i"
+	@echo "... utils2.s"
 .PHONY : help
 
 

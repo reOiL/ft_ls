@@ -1,6 +1,20 @@
-#include "ft_ls.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls_with_l.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 14:18:19 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/06 14:40:18 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path, int only_one)
+#include "ft_ls.h"
+#include "args.h"
+
+void		print_fileinfo_l(t_file **subfiles, t_flag flag, \
+		char *path, int only_one)
 {
 	t_maxlen	maxlen;
 	char		*fileinfo;
@@ -18,7 +32,7 @@ int		print_fileinfo_l(t_file **subfiles, t_flag flag, char *path, int only_one)
 	}
 }
 
-int		print_files_links(char *filename, t_flag flag, char *path)
+void		print_files_links(char *filename, t_flag flag, char *path)
 {
 	t_file		*file;
 
@@ -28,17 +42,16 @@ int		print_files_links(char *filename, t_flag flag, char *path)
 	free_all(&file);
 }
 
-int print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
+int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 {
 	DIR				*dir;
 	struct dirent	*dp;
-	t_file 			*subfiles;
-	t_file			*tmp;
+	t_file			*subfiles;
 
 	subfiles = NULL;
 	if (flag & FLAG_REC)
 		ft_printf("%s:\n", path);
-	if(!(dir = opendir(path)))
+	if (!(dir = opendir(path)))
 	{
 		ft_strdel(&path);
 		return (print_error(13, dirname));
@@ -52,25 +65,9 @@ int print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 	closedir(dir);
 	if (subfiles)
 		ft_printf("total %lld\n", get_blocks(subfiles));
-	print_fileinfo_l(&subfiles, flag, path, 0);
-
-	tmp = subfiles;
-	//if FLAG_REC - пройтись этой же функцией по поддиректориям Вынести в отдельную функцию
-	if (flag & FLAG_REC)
-	{
-		del_all_files(&subfiles);
-		tmp = subfiles;
-		while (subfiles)
-		{
-			if (is_dir(subfiles))
-			{
-				ft_putchar('\n');
-				print_dirfiles(subfiles->filename, flag, path_join(path, subfiles->filename), 0);
-			}
-			subfiles = subfiles->next;
-		}
-	}
-	free_all(&tmp);
+	print_fileinfo_l(&subfiles, flag, path, only_one);
+	subfiles = go_rec(&subfiles, flag, path, only_one);
+	free_all(&subfiles);
 	ft_strdel(&path);
 }
 
@@ -80,7 +77,8 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 		ft_printf("%s:\n", arg_dirs->fullpath);
 	if (S_ISDIR(arg_dirs->s_stat->st_mode))
 	{
-		print_dirfiles(arg_dirs->filename, flag, ft_strdup(arg_dirs->filename), only_one);
+		print_dirfiles(arg_dirs->filename, flag, \
+				ft_strdup(arg_dirs->filename), only_one);
 		if (!only_one && arg_dirs->next)
 			ft_putchar('\n');
 	}
@@ -94,7 +92,7 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 
 void		ls_with_l(t_flag flag, t_file *arg_dirs)
 {
-	int 	only_one;
+	int		only_one;
 
 	only_one = (arg_dirs->next && !(flag & FLAG_REC)) ? 0 : 1;
 	while (arg_dirs)

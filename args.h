@@ -27,10 +27,18 @@ t_flag			parse_attr(char **str, int arg_count, \
 /*
 ** ls_with_l.c
 */
-int				print_fileinfo_l(t_file **subfiles, t_flag flag, char *path, int only_one);
-int				print_files_links(char *filename, t_flag flag, char *path);
-int				print_dirfiles(char *dirname, t_flag flag, char *path, int only_one);
+void print_fileinfo_l(t_file **subfiles, t_flag flag, \
+				char *path, int only_one);
+void print_files_links(char *filename, t_flag flag, char *path);
+int				print_dirfiles(char *dirname, t_flag flag, char \
+				*path, int only_one);
 void			print_files_l(t_flag flag, t_file *arg_dirs, int only_one);
 void			ls_with_l(t_flag flag, t_file *arg_dirs);
+
+
+/*
+** rec_flag_helper.c
+ */
+t_file		*go_rec(t_file **subfiles, t_flag flag, char *path, int only_one);
 
 #endif

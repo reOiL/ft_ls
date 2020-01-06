@@ -55,20 +55,16 @@ t_flag	parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 	int		j;
 	t_flag flag;
 
-	//check for minus!
 	i = 0;
 	flag = 0;
 	*files = NULL;
-	while (i < arg_count && str[i][0] == '-')
+	while (i < arg_count && str[i][0] == '-' && ft_strlen(str[i]) > 1)
 	{
 		j = 1;
 		while (j < ft_strlen(str[i]))
 		{
 			if (!chr_to_flag(str[i][j]))
-			{
 				print_error(22, &str[i][j]);
-				exit(-1);
-			}
 			flag |= chr_to_flag(str[i][j]);
 			j++;
 		}

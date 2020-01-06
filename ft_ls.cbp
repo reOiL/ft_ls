@@ -95,7 +95,7 @@
 		<Unit filename="/Users/eblackbu/ft_ls/args.h">
 			<Option target="ft_ls"/>
 		</Unit>
-		<Unit filename="/Users/eblackbu/ft_ls/comporators.c">
+		<Unit filename="/Users/eblackbu/ft_ls/comparators.c">
 			<Option target="ft_ls"/>
 		</Unit>
 		<Unit filename="/Users/eblackbu/ft_ls/del_from_lists.c">
@@ -371,10 +371,16 @@
 		<Unit filename="/Users/eblackbu/ft_ls/main.c">
 			<Option target="ft_ls"/>
 		</Unit>
+		<Unit filename="/Users/eblackbu/ft_ls/rec_flag_helper.c">
+			<Option target="ft_ls"/>
+		</Unit>
 		<Unit filename="/Users/eblackbu/ft_ls/t_file_helper.c">
 			<Option target="ft_ls"/>
 		</Unit>
 		<Unit filename="/Users/eblackbu/ft_ls/utils.c">
+			<Option target="ft_ls"/>
+		</Unit>
+		<Unit filename="/Users/eblackbu/ft_ls/utils2.c">
 			<Option target="ft_ls"/>
 		</Unit>
 		<Unit filename="/Users/eblackbu/ft_ls/CMakeLists.txt">

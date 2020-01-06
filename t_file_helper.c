@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_file_helper.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 14:17:17 by eblackbu          #+#    #+#             */
+/*   Updated: 2020/01/06 14:17:58 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-void	del_tfile(t_file **files)
+void		del_tfile(t_file **files)
 {
 	if ((*files)->s_stat)
 		free((*files)->s_stat);
@@ -21,7 +33,8 @@ t_file		*new_tfile(char *filename, char *path)
 	item->next = NULL;
 	item->filename = ft_strdup(filename);
 	item->s_stat = (struct stat*)malloc(sizeof(struct stat));
-	item->fullpath = ft_strcmp(path, ".") ? path_join(path, filename) : ft_strdup(filename);
+	item->fullpath = ft_strcmp(path, ".") ? \
+					path_join(path, filename) : ft_strdup(filename);
 	lstat(item->fullpath, item->s_stat);
 	return (item);
 }
