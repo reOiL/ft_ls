@@ -105,4 +105,4 @@ add_executable(ft_ls
         main.c
         t_file_helper.c
         utils.c
-        utils2.c rec_flag_helper.c)
+        utils2.c rec_flag_helper.c comparators_2.c)

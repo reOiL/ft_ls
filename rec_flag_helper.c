@@ -30,7 +30,7 @@ t_file		*go_rec(t_file **subfiles, t_flag flag, char *path, int only_one)
 			{
 				ft_putchar('\n');
 				print_dirfiles((*subfiles)->filename, flag, \
-						path_join(path, (*subfiles)->filename), only_one);
+						path_join(path, (*subfiles)->filename), 0);
 			}
 			*subfiles = (*subfiles)->next;
 		}

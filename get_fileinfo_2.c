@@ -31,13 +31,19 @@ char	*add_linkway(t_file *file, char *str)
 	return (full_str);
 }
 
-char	*get_end_line(t_file *file, t_maxlen maxlen, char *acr_hlnks)
+char *get_end_line(t_file *file, t_maxlen \
+ maxlen, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
 	char	*needed_time;
 	char	*str;
 
-	time_stamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
+	if (flag & FLAG_UBIG)
+		time_stamp = ctime(&file->s_stat->st_ctimespec.tv_sec);
+	else if (flag & FLAG_U)
+		time_stamp = ctime(&file->s_stat->st_atimespec.tv_sec);
+	else
+		time_stamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
 	needed_time = ft_strnew(14);
 	ft_strncpy(needed_time, &time_stamp[4], 13);
 	str = ft_strnew(ft_strlen(acr_hlnks) + 15 + ft_strlen(file->filename));

@@ -204,6 +204,33 @@ comparators.c.s:
 	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators.c.s
 .PHONY : comparators.c.s
 
+comparators_2.o: comparators_2.c.o
+
+.PHONY : comparators_2.o
+
+# target to build an object file
+comparators_2.c.o:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators_2.c.o
+.PHONY : comparators_2.c.o
+
+comparators_2.i: comparators_2.c.i
+
+.PHONY : comparators_2.i
+
+# target to preprocess a source file
+comparators_2.c.i:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators_2.c.i
+.PHONY : comparators_2.c.i
+
+comparators_2.s: comparators_2.c.s
+
+.PHONY : comparators_2.s
+
+# target to generate assembly for a file
+comparators_2.c.s:
+	$(MAKE) -f CMakeFiles/ft_ls.dir/build.make CMakeFiles/ft_ls.dir/comparators_2.c.s
+.PHONY : comparators_2.c.s
+
 del_from_lists.o: del_from_lists.c.o
 
 .PHONY : del_from_lists.o
@@ -2652,6 +2679,9 @@ help:
 	@echo "... comparators.o"
 	@echo "... comparators.i"
 	@echo "... comparators.s"
+	@echo "... comparators_2.o"
+	@echo "... comparators_2.i"
+	@echo "... comparators_2.s"
 	@echo "... del_from_lists.o"
 	@echo "... del_from_lists.i"
 	@echo "... del_from_lists.s"

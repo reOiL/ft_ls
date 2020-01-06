@@ -31,6 +31,8 @@
 # define FLAG_F		(FLAG_L << 5)
 # define FLAG_D		(FLAG_L << 6)
 # define FLAG_G		(FLAG_L << 7)
+# define FLAG_U		(FLAG_L << 8)
+# define FLAG_UBIG	(FLAG_L << 9)
 
 typedef size_t			t_flag;
 typedef struct dirent	t_dirent;
@@ -69,6 +71,12 @@ int					cmp_file_type(t_file *f1, t_file *f2);
 int					cmp_flag_f(t_file *f1, t_file *f2);
 
 /*
+** comparators_2.c
+*/
+int					cmp_flag_u(t_file *f1, t_file *f2);
+int					cmp_flag_ubig(t_file *f1, t_file *f2);
+
+/*
 ** del_from_lists
 */
 void				del_all_hidden(t_file **files);
@@ -83,22 +91,18 @@ int					print_error(int code, char *str);
 /*
 ** get_fileinfo_1.c
 */
-char				*get_count_bytes(t_file *file, t_maxlen \
-		maxlen, char *acr_hlnks);
-char				*get_group_name(t_file *file, t_maxlen \
-		maxlen, char *acr_hlnks);
-char				*get_user_name(t_file *file, t_maxlen \
-		maxlen, char *acr_hlnks);
-char				*get_hard_links(t_file *file, t_maxlen \
-		maxlen, char *acrights);
-char				*get_fileinfo(t_file *file, t_maxlen maxlen);
+char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
+char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
+char *get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
+char *get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag);
+char *get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag);
 
 /*
 ** get_fileinfo_2.c
 */
 char				*add_linkway(t_file *file, char *str);
-char				*get_end_line(t_file *file, t_maxlen \
-		maxlen, char *acr_hlnks);
+char *get_end_line(t_file *file, t_maxlen \
+ maxlen, char *acr_hlnks, t_flag flag);
 
 /*
 ** l_flag_helper1.c

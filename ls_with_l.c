@@ -13,8 +13,7 @@
 #include "ft_ls.h"
 #include "args.h"
 
-void		print_fileinfo_l(t_file **subfiles, t_flag flag, \
-		char *path, int only_one)
+void		print_fileinfo_l(t_file **subfiles, t_flag flag)
 {
 	t_maxlen	maxlen;
 	char		*fileinfo;
@@ -25,7 +24,7 @@ void		print_fileinfo_l(t_file **subfiles, t_flag flag, \
 	tmp = *subfiles;
 	while (tmp)
 	{
-		fileinfo = get_fileinfo(tmp, maxlen);
+		fileinfo = get_fileinfo(tmp, maxlen, flag);
 		ft_putendl(fileinfo);
 		ft_strdel(&fileinfo);
 		tmp = tmp->next;
@@ -38,7 +37,7 @@ void		print_files_links(char *filename, t_flag flag, char *path)
 
 	file = NULL;
 	add_new_tfile(&file, filename, path);
-	print_fileinfo_l(&file, flag, path, 0);
+	print_fileinfo_l(&file, flag);
 	free_all(&file);
 }
 
@@ -49,7 +48,7 @@ int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 	t_file			*subfiles;
 
 	subfiles = NULL;
-	if (flag & FLAG_REC)
+	if ((flag & FLAG_REC) && !(flag & FLAG_D) && !only_one)
 		ft_printf("%s:\n", path);
 	if (!(dir = opendir(path)))
 	{
@@ -65,7 +64,7 @@ int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 	closedir(dir);
 	if (subfiles)
 		ft_printf("total %lld\n", get_blocks(subfiles));
-	print_fileinfo_l(&subfiles, flag, path, only_one);
+	print_fileinfo_l(&subfiles, flag);
 	subfiles = go_rec(&subfiles, flag, path, only_one);
 	free_all(&subfiles);
 	ft_strdel(&path);
@@ -73,9 +72,10 @@ int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 
 void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 {
-	if (!only_one && S_ISDIR(arg_dirs->s_stat->st_mode))
+	if (!only_one && S_ISDIR(arg_dirs->s_stat->st_mode) && \
+	!(flag & FLAG_REC) && !(flag & FLAG_D))
 		ft_printf("%s:\n", arg_dirs->fullpath);
-	if (S_ISDIR(arg_dirs->s_stat->st_mode))
+	if (S_ISDIR(arg_dirs->s_stat->st_mode) && !(flag & FLAG_D))
 	{
 		print_dirfiles(arg_dirs->filename, flag, \
 				ft_strdup(arg_dirs->filename), only_one);
@@ -85,7 +85,8 @@ void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)
 	else
 	{
 		print_files_links(arg_dirs->filename, flag, ".");
-		if (arg_dirs->next && S_ISDIR(arg_dirs->next->s_stat->st_mode))
+		if (arg_dirs->next && \
+		S_ISDIR(arg_dirs->next->s_stat->st_mode) && !(flag & FLAG_D))
 			ft_putchar('\n');
 	}
 }
@@ -94,7 +95,7 @@ void		ls_with_l(t_flag flag, t_file *arg_dirs)
 {
 	int		only_one;
 
-	only_one = (arg_dirs->next && !(flag & FLAG_REC)) ? 0 : 1;
+	only_one = (arg_dirs->next) ? 0 : 1;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat->st_mode))

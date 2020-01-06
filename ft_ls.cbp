@@ -98,6 +98,9 @@
 		<Unit filename="/Users/eblackbu/ft_ls/comparators.c">
 			<Option target="ft_ls"/>
 		</Unit>
+		<Unit filename="/Users/eblackbu/ft_ls/comparators_2.c">
+			<Option target="ft_ls"/>
+		</Unit>
 		<Unit filename="/Users/eblackbu/ft_ls/del_from_lists.c">
 			<Option target="ft_ls"/>
 		</Unit>

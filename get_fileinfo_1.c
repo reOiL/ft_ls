@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char	*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks)
+char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*count_bytes;
@@ -30,10 +30,10 @@ char	*get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	ft_strcpy(&str[i], count_bytes);
 	ft_strdel(&acr_hlnks);
 	ft_strdel(&count_bytes);
-	return (get_end_line(file, maxlen, str));
+	return (get_end_line(file, maxlen, str, flag));
 }
 
-char	*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
+char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*group_name;
@@ -54,10 +54,10 @@ char	*get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	}
 	ft_strdel(&acr_hlnks);
 	ft_strdel(&group_name);
-	return (get_count_bytes(file, maxlen, str));
+	return (get_count_bytes(file, maxlen, str, flag));
 }
 
-char	*get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
+char *get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*user_name;
@@ -78,10 +78,10 @@ char	*get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks)
 	}
 	ft_strdel(&acr_hlnks);
 	ft_strdel(&user_name);
-	return (get_group_name(file, maxlen, str));
+	return (get_group_name(file, maxlen, str, flag));
 }
 
-char	*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights)
+char *get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag)
 {
 	size_t	i;
 	char	*hardlinks;
@@ -99,10 +99,10 @@ char	*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights)
 	ft_strcpy(&str[i], hardlinks);
 	ft_strdel(&acrights);
 	free(hardlinks);
-	return (get_user_name(file, maxlen, str));
+	return (get_user_name(file, maxlen, str, flag));
 }
 
-char	*get_fileinfo(t_file *file, t_maxlen maxlen)
+char *get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag)
 {
 	char	*acrights;
 
@@ -118,5 +118,5 @@ char	*get_fileinfo(t_file *file, t_maxlen maxlen)
 	acrights[8] = (S_IWOTH & file->s_stat->st_mode) ? 'w' : '-';
 	acrights[9] = get_ninth_acright(file);
 	acrights[10] = ' ';
-	return (get_hard_links(file, maxlen, acrights));
+	return (get_hard_links(file, maxlen, acrights, flag));
 }

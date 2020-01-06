@@ -12,6 +12,22 @@
 
 #include "ft_ls.h"
 
+void		del_one_file(t_file **files, t_file **prev, t_file **next)
+{
+	if (*prev)
+	{
+		(*prev)->next = (*next)->next;
+		del_tfile(next);
+		*next = (*prev)->next ? (*prev)->next : NULL;
+	}
+	else
+	{
+		*files = (*next)->next ? (*next)->next : NULL;
+		del_tfile(next);
+		*next = *files ? *files : NULL;
+	}
+}
+
 void		del_all_files(t_file **files)
 {
 	t_file		*tmp_prev;
@@ -21,21 +37,10 @@ void		del_all_files(t_file **files)
 	tmp_next = *files;
 	while (tmp_next)
 	{
-		if (!S_ISDIR(tmp_next->s_stat->st_mode) || !ft_strcmp(tmp_next->filename, ".") || !ft_strcmp(tmp_next->filename, ".."))
-		{
-			if (tmp_prev)
-			{
-				tmp_prev->next = tmp_next->next;
-				del_tfile(&tmp_next);
-				tmp_next = tmp_prev->next ? tmp_prev->next : NULL;
-			}
-			else
-			{
-				*files = tmp_next->next ? tmp_next->next : NULL;
-				del_tfile(&tmp_next);
-				tmp_next = *files ? *files : NULL;
-			}
-		}
+		if (!S_ISDIR(tmp_next->s_stat->st_mode) || \
+		!ft_strcmp(tmp_next->filename, ".") || \
+		!ft_strcmp(tmp_next->filename, ".."))
+			del_one_file(files, &tmp_prev, &tmp_next);
 		else
 		{
 			tmp_prev = tmp_next;

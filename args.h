@@ -27,8 +27,7 @@ t_flag			parse_attr(char **str, int arg_count, \
 /*
 ** ls_with_l.c
 */
-void print_fileinfo_l(t_file **subfiles, t_flag flag, \
-				char *path, int only_one);
+void print_fileinfo_l(t_file **subfiles, t_flag flag);
 void print_files_links(char *filename, t_flag flag, char *path);
 int				print_dirfiles(char *dirname, t_flag flag, char \
 				*path, int only_one);

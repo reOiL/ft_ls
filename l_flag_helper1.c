@@ -60,8 +60,17 @@ size_t		get_blocks(t_file *files)
 
 void		sort_files(t_file **files, t_flag flag)
 {
-	if ((flag & FLAG_T))
-		sort_lst(*files, cmp_flag_t, flag & FLAG_R ? 1 : 0);
+	if (flag & FLAG_F)
+		sort_lst(*files, cmp_flag_f, flag & FLAG_R ? 1 : 0);
+	else if ((flag & FLAG_T))
+	{
+		if (flag & FLAG_UBIG)
+			sort_lst(*files, cmp_flag_ubig, flag & FLAG_R ? 1 : 0);
+		else if (flag & FLAG_U)
+			sort_lst(*files, cmp_flag_u, flag & FLAG_R ? 1 : 0);
+		else
+			sort_lst(*files, cmp_flag_t, flag & FLAG_R ? 1 : 0);
+	}
 	else
 		sort_lst(*files, cmp_flag_ascii, flag & FLAG_R ? 0 : 1);
 }
