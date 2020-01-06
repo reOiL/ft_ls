@@ -1,24 +1,32 @@
-//
-// Created by Johnny Webber on 06/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 13:11:13 by jwebber           #+#    #+#             */
+/*   Updated: 2020/01/06 13:11:53 by jwebber          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int 	is_dir(t_file *file)
+int		is_dir(t_file *file)
 {
 	if (!file)
 		return (-1);
 	return (S_ISDIR(file->s_stat->st_mode));
 }
 
-int 	is_link(t_file *file)
+int		is_link(t_file *file)
 {
 	if (!file)
 		return (-1);
 	return (S_ISLNK(file->s_stat->st_mode));
 }
 
-int 	is_exec(t_file *file)
+int		is_exec(t_file *file)
 {
 	if (!file)
 		return (-1);
