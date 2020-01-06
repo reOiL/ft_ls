@@ -1,33 +1,49 @@
-//
-// Created by Johnny Webber on 04/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls_without_l.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 13:15:13 by jwebber           #+#    #+#             */
+/*   Updated: 2020/01/06 13:19:56 by jwebber          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 #include <errno.h>
 
-void		print_dir(t_flag flag, t_file *file, int is_many)
+int			print_dir1(t_flag flag, t_file *file, t_file **subfiles, int ismany)
 {
 	DIR			*dir;
 	t_dirent	*dp;
-	t_file		*subfiles;
-	t_file		*subfiles_iter;
 
-	subfiles = NULL;
+	(*subfiles) = NULL;
 	if (!(dir = opendir(file->fullpath)))
 	{
-		if (is_many)
+		if (ismany)
 			ft_printf("\n%s:\n", file->fullpath);
 		print_error(EACCES, file->filename);
-		return ;
+		return (-1);
 	}
 	while ((dp = readdir(dir)))
 	{
 		if (!(flag & FLAG_A) && dp->d_name[0] == '.')
 			continue;
-		add_new_tfile(&subfiles, dp->d_name, file->fullpath);
+		add_new_tfile(subfiles, dp->d_name, file->fullpath);
 	}
 	closedir(dir);
-	sort_by_flag(subfiles, flag);
+	sort_by_flag(*subfiles, flag);
+	return (0);
+}
+
+void		print_dir(t_flag flag, t_file *file, int is_many)
+{
+	t_file		*subfiles;
+	t_file		*subfiles_iter;
+
+	if (print_dir1(flag, file, &subfiles, is_many) == -1)
+		return ;
 	subfiles_iter = subfiles;
 	if (is_many)
 		ft_printf("\n%s:\n", file->fullpath);
@@ -38,14 +54,11 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 	}
 	if (flag & FLAG_REC)
 	{
-		del_all_files(&subfiles);
 		subfiles_iter = subfiles;
 		while (subfiles_iter)
 		{
-			if (is_dir(subfiles_iter))
-			{
+			if (is_dir(subfiles_iter) && !is_spec_dir(subfiles_iter))
 				print_dir(flag, subfiles_iter, 1);
-			}
 			subfiles_iter = subfiles_iter->next;
 		}
 	}
