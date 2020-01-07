@@ -46,7 +46,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		return ;
 	subfiles_iter = subfiles;
 	if (is_many)
-		ft_printf("\n%s:\n", file->fullpath);
+		ft_printf("%s:\n", file->fullpath);
 	while (subfiles_iter)
 	{
 		print_file_name(subfiles_iter, flag);
@@ -62,6 +62,8 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 			subfiles_iter = subfiles_iter->next;
 		}
 	}
+	if (file->next)
+		ft_printf("\n");
 	free_all(&subfiles);
 }
 
