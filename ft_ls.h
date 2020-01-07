@@ -60,7 +60,7 @@ char				get_filetype(t_file *file);
 char				get_third_acright(t_file *file);
 char				get_sixth_acright(t_file *file);
 char				get_ninth_acright(t_file *file);
-char				get_extended_attr(t_file *file);
+char				get_acl(t_file *file);
 
 /*
 ** comparators.c

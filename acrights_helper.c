@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <sys/acl.h>
 
 char	get_filetype(t_file *file)
 {
@@ -54,4 +55,20 @@ char	get_ninth_acright(t_file *file)
 	if (S_IXOTH & file->s_stat->st_mode)
 		return ('x');
 	return ('-');
+}
+
+char 	get_acl(t_file *file)
+{
+	acl_t	acl;
+	char 	a;
+
+	if (listxattr(file->fullpath, &a, 1, XATTR_NOFOLLOW) < 0 && errno != EACCES)
+		return '@';
+	acl = acl_get_file(file->fullpath, ACL_TYPE_EXTENDED);
+	if (acl)
+	{
+		acl_free(acl);
+		return '+';
+	}
+	return ' ';
 }
