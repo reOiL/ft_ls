@@ -45,7 +45,7 @@ char	*get_timestamp(t_file *file, t_flag flag)
 	else
 		spec = file->s_stat->st_mtimespec;
 	timestamp = ctime(&spec.tv_sec);
-	if (spec.tv_sec < time(NULL) - 15768000)
+	if (spec.tv_sec < time(NULL) - 15768000 || spec.tv_sec > time(NULL))
 	{
 		ft_strncpy(ret, &timestamp[4], 7);
 		ft_strncpy(&ret[7], &timestamp[19], 6);
