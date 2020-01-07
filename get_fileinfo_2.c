@@ -57,19 +57,35 @@ char 	*get_timestamp(t_file *file, t_flag flag)
 	return (ret);
 }
 
+char	*colored_name(t_file *file, t_flag flag)
+{
+	if (is_dir(file) && flag & FLAG_G)
+		return ("\e[1m\e[36m");
+	else if (is_link(file) && flag & FLAG_G)
+		return ("\e[1m\e[35m");
+	else if (is_exec(file) && flag & FLAG_G)
+		return ("31m");
+	return ("");
+}
+
 char	*get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
 	char	*str;
+	char 	*color;
 
 	time_stamp = get_timestamp(file, flag);
-	str = ft_strnew(ft_strlen(acr_hlnks) + 15 + ft_strlen(file->filename));
+	color = colored_name(file, flag);
+	str = ft_strnew(ft_strlen(acr_hlnks) + 15 + ft_strlen(file->filename)
+			+ ft_strlen(color) + 4);
 	ft_strcpy(str, acr_hlnks);
 	str[ft_strlen(acr_hlnks)] = ' ';
 	ft_strcpy(&str[ft_strlen(acr_hlnks) + 1], time_stamp);
 	str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp)] = ' ';
-	ft_strcpy(&str[ft_strlen(acr_hlnks) + \
-			ft_strlen(time_stamp) + 1], file->filename);
+	ft_strcpy(&str[ft_strlen(str)], color);
+	ft_strcpy(&str[ft_strlen(str)], file->filename);
+	if (flag & FLAG_G)
+		ft_strcpy(&str[ft_strlen(str)], "\e[0m");
 	ft_strdel(&acr_hlnks);
 	ft_strdel(&time_stamp);
 	if (S_ISLNK(file->s_stat->st_mode))
