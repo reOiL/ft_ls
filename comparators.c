@@ -26,34 +26,6 @@ int	cmp_flag_ascii(t_file *f1, t_file *f2)
 	return (ft_strcmp(f1->filename, f2->filename));
 }
 
-int	cmp_file_type(t_file *f1, t_file *f2)
-{
-	int a;
-	int b;
-
-	a = is_dir(f1);
-	b = is_dir(f2);
-	if (a && !b)
-		return (1);
-	if (!a && b)
-		return (1);
-	return (0);
-}
-
-int	cmp_file_type_ascii(t_file *f1, t_file *f2)
-{
-	int a;
-	int b;
-
-	a = is_dir(f1);
-	b = is_dir(f2);
-	if (a && !b)
-		return (1);
-	if (!a && b)
-		return (1);
-	return (0);
-}
-
 int	cmp_flag_f(t_file *f1, t_file *f2)
 {
 	size_t	i;

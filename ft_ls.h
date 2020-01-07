@@ -67,7 +67,6 @@ char				get_acl(t_file *file);
 */
 int					cmp_flag_t(t_file *f1, t_file *f2);
 int					cmp_flag_ascii(t_file *f1, t_file *f2);
-int					cmp_file_type(t_file *f1, t_file *f2);
 int					cmp_flag_f(t_file *f1, t_file *f2);
 
 /*
@@ -79,7 +78,6 @@ int					cmp_flag_ubig(t_file *f1, t_file *f2);
 /*
 ** del_from_lists
 */
-void				del_all_hidden(t_file **files);
 void				del_all_files(t_file **files);
 void				free_all(t_file **files);
 
@@ -115,7 +113,6 @@ void				print_dir(t_flag flag, t_file *file, int is_many,
 t_maxlen			initialize_maxlen(void);
 t_maxlen			get_max_lengths(t_file *files);
 size_t				get_blocks(t_file *files);
-void				sort_files(t_file **files, t_flag flag);
 
 /*
 ** t_file_helper.c
