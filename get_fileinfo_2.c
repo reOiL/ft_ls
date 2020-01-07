@@ -38,7 +38,7 @@ char 	*get_timestamp(t_file *file, t_flag flag)
 
 	ret = ft_strnew(14);
 	if (flag & FLAG_UBIG)
-		timestamp = ctime(&file->s_stat->st_ctimespec.tv_sec);
+		timestamp = ctime(&file->s_stat->st_birthtimespec.tv_sec);
 	else if (flag & FLAG_U)
 		timestamp = ctime(&file->s_stat->st_atimespec.tv_sec);
 	else
