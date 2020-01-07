@@ -13,7 +13,7 @@
 #include "ft_ls.h"
 #include "args.h"
 
-t_file		*go_rec(t_file **subfiles, t_flag flag, char *path, int only_one)
+t_file *go_rec(t_file **subfiles, t_flag flag, char *path)
 {
 	t_file	*tmp;
 

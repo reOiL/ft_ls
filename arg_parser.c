@@ -56,7 +56,7 @@ void		get_filenames(char **str, int arg_count, \
 t_flag		parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 {
 	int		i;
-	int		j;
+	size_t	j;
 	t_flag	flag;
 
 	i = 0;

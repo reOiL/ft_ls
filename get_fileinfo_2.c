@@ -31,8 +31,7 @@ char	*add_linkway(t_file *file, char *str)
 	return (full_str);
 }
 
-char *get_end_line(t_file *file, t_maxlen \
- maxlen, char *acr_hlnks, t_flag flag)
+char *get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
 	char	*needed_time;

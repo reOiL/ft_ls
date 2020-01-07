@@ -61,13 +61,13 @@ int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 			continue;
 		add_new_tfile(&subfiles, dp->d_name, path);
 	}
-	closedir(dir);
-	if (subfiles)
+	if (closedir(dir) < 1 && subfiles)
 		ft_printf("total %lld\n", get_blocks(subfiles));
 	print_fileinfo_l(&subfiles, flag);
-	subfiles = go_rec(&subfiles, flag, path, only_one);
+	subfiles = go_rec(&subfiles, flag, path);
 	free_all(&subfiles);
 	ft_strdel(&path);
+	return (0);
 }
 
 void		print_files_l(t_flag flag, t_file *arg_dirs, int only_one)

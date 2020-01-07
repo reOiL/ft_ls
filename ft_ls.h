@@ -101,8 +101,7 @@ char *get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag);
 ** get_fileinfo_2.c
 */
 char				*add_linkway(t_file *file, char *str);
-char *get_end_line(t_file *file, t_maxlen \
- maxlen, char *acr_hlnks, t_flag flag);
+char *get_end_line(t_file *file, char *acr_hlnks, t_flag flag);
 
 /*
 ** l_flag_helper1.c

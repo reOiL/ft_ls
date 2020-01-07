@@ -32,13 +32,14 @@ t_maxlen	get_max_lengths(t_file *files)
 	while (files)
 	{
 		stats = files->s_stat;
-		if (max_len.len_hlinks < count_digits(stats->st_nlink, 10))
+		if (max_len.len_hlinks < \
+				(unsigned int)count_digits(stats->st_nlink, 10))
 			max_len.len_hlinks = count_digits(stats->st_nlink, 10);
 		if (max_len.len_group < ft_strlen(getgrgid(stats->st_gid)->gr_name))
 			max_len.len_group = ft_strlen(getgrgid(stats->st_gid)->gr_name);
 		if (max_len.len_user < ft_strlen(getpwuid(stats->st_uid)->pw_name))
 			max_len.len_user = ft_strlen(getpwuid(stats->st_uid)->pw_name);
-		if (max_len.len_bytes < count_digits(stats->st_size, 10))
+		if (max_len.len_bytes < (unsigned int)count_digits(stats->st_size, 10))
 			max_len.len_bytes = count_digits(stats->st_size, 10);
 		files = files->next;
 	}

@@ -38,6 +38,6 @@ void			ls_with_l(t_flag flag, t_file *arg_dirs);
 /*
 ** rec_flag_helper.c
  */
-t_file		*go_rec(t_file **subfiles, t_flag flag, char *path, int only_one);
+t_file *go_rec(t_file **subfiles, t_flag flag, char *path);
 
 #endif

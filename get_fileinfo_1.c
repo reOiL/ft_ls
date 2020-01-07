@@ -30,7 +30,7 @@ char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag fla
 	ft_strcpy(&str[i], count_bytes);
 	ft_strdel(&acr_hlnks);
 	ft_strdel(&count_bytes);
-	return (get_end_line(file, maxlen, str, flag));
+	return (get_end_line(file, str, flag));
 }
 
 char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
