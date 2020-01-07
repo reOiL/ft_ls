@@ -19,7 +19,7 @@ void		print_fileinfo_l(t_file **subfiles, t_flag flag)
 	char		*fileinfo;
 	t_file		*tmp;
 
-	sort_files(subfiles, flag);
+	sort_by_flag(*subfiles, flag);
 	maxlen = get_max_lengths(*subfiles);
 	tmp = *subfiles;
 	while (tmp)
