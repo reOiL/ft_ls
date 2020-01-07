@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 12:31:56 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 15:06:44 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 14:15:29 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ char	get_ninth_acright(t_file *file)
 	return ('-');
 }
 
-char 	get_acl(t_file *file)
+char	get_acl(t_file *file)
 {
 	acl_t	acl;
-	char 	a;
+	char	a;
 
 	if (listxattr(file->fullpath, &a, 1, XATTR_NOFOLLOW) < 0 && errno != EACCES)
-		return '@';
+		return ('@');
 	acl = acl_get_link_np(file->fullpath, ACL_TYPE_EXTENDED);
 	if (acl)
 	{
 		acl_free(acl);
-		return '+';
+		return ('+');
 	}
-	return ' ';
+	return (' ');
 }

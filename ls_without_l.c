@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 13:15:13 by jwebber           #+#    #+#             */
-/*   Updated: 2020/01/06 13:19:56 by jwebber          ###   ########.fr       */
+/*   Updated: 2020/01/07 14:19:04 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ int			print_dir1(t_flag flag, t_file *file, t_file **subfiles, int ismany)
 	return (0);
 }
 
+void		print_dir_rec(t_file *subfiles_iter, t_flag flag)
+{
+	while (subfiles_iter)
+	{
+		if (is_dir(subfiles_iter) && !is_spec_dir(subfiles_iter))
+			print_dir(flag, subfiles_iter, 1, 0);
+		subfiles_iter = subfiles_iter->next;
+	}
+}
+
 void		print_dir(t_flag flag, t_file *file, int is_many, int is_first)
 {
 	t_file		*subfiles;
@@ -55,17 +65,7 @@ void		print_dir(t_flag flag, t_file *file, int is_many, int is_first)
 		subfiles_iter = subfiles_iter->next;
 	}
 	if (flag & FLAG_REC)
-	{
-		subfiles_iter = subfiles;
-		while (subfiles_iter)
-		{
-			if (is_dir(subfiles_iter) && !is_spec_dir(subfiles_iter))
-				print_dir(flag, subfiles_iter, 1, 0);
-			subfiles_iter = subfiles_iter->next;
-		}
-	}
-	//if (file->next)
-	//	ft_printf("\n");
+		print_dir_rec(subfiles, flag);
 	free_all(&subfiles);
 }
 

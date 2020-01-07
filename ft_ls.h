@@ -106,6 +106,8 @@ char				*get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag);
 */
 char				*add_linkway(t_file *file, char *str);
 char				*get_end_line(t_file *file, char *acr_hlnks, t_flag flag);
+void				print_dir(t_flag flag, t_file *file, int is_many,
+								int is_first);
 
 /*
 ** l_flag_helper1.c

@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:15:04 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/07 10:51:44 by jwebber          ###   ########.fr       */
+/*   Updated: 2020/01/07 14:16:46 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ char	*add_linkway(t_file *file, char *str)
 	return (full_str);
 }
 
-char 	*get_timestamp(t_file *file, t_flag flag)
+char	*get_timestamp(t_file *file, t_flag flag)
 {
-	char *timestamp;
-	struct timespec spec;
-	char *ret;
+	char			*timestamp;
+	struct timespec	spec;
+	char			*ret;
 
 	ret = ft_strnew(14);
 	if (flag & FLAG_UBIG)
@@ -72,7 +72,7 @@ char	*get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
 	char	*str;
-	char 	*color;
+	char	*color;
 
 	time_stamp = get_timestamp(file, flag);
 	color = colored_name(file, flag);
