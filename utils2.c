@@ -35,10 +35,10 @@ int		is_exec(t_file *file)
 
 void	sort_by_flag(t_file *lst, t_flag flag)
 {
-	if ((flag & FLAG_T))
+	if ((flag & FLAG_F) && !(flag & FLAG_D))
+		sort_lst(lst, cmp_flag_f, 1);
+	else if ((flag & FLAG_T))
 		sort_lst(lst, cmp_flag_t, flag & FLAG_R ? 1 : 0);
-	else if ((flag & FLAG_F) && !(flag & FLAG_D))
-		sort_lst(lst, cmp_flag_f, flag & FLAG_R ? 0 : 1);
 	else if (!(flag & FLAG_D))
 		sort_lst(lst, cmp_flag_ascii, flag & FLAG_R ? 0 : 1);
 }
