@@ -34,16 +34,18 @@ char	*add_linkway(t_file *file, char *str)
 char 	*get_timestamp(t_file *file, t_flag flag)
 {
 	char *timestamp;
+	struct timespec spec;
 	char *ret;
 
 	ret = ft_strnew(14);
 	if (flag & FLAG_UBIG)
-		timestamp = ctime(&file->s_stat->st_birthtimespec.tv_sec);
+		spec = file->s_stat->st_birthtimespec;
 	else if (flag & FLAG_U)
-		timestamp = ctime(&file->s_stat->st_atimespec.tv_sec);
+		spec = file->s_stat->st_atimespec;
 	else
-		timestamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
-	if (file->s_stat->st_mtimespec.tv_sec < time(NULL) - 15768000)
+		spec = file->s_stat->st_mtimespec;
+	timestamp = ctime(&spec.tv_sec);
+	if (spec.tv_sec < time(NULL) - 15768000)
 	{
 		ft_strncpy(ret, &timestamp[4], 7);
 		ft_strncpy(&ret[7], &timestamp[19], 6);

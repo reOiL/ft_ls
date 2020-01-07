@@ -64,7 +64,7 @@ char 	get_acl(t_file *file)
 
 	if (listxattr(file->fullpath, &a, 1, XATTR_NOFOLLOW) < 0 && errno != EACCES)
 		return '@';
-	acl = acl_get_file(file->fullpath, ACL_TYPE_EXTENDED);
+	acl = acl_get_link_np(file->fullpath, ACL_TYPE_EXTENDED);
 	if (acl)
 	{
 		acl_free(acl);
