@@ -111,6 +111,7 @@ char				*get_end_line(t_file *file, char *acr_hlnks, t_flag flag);
 ** l_flag_helper1.c
 */
 t_maxlen			initialize_maxlen(void);
+t_maxlen			get_max_lengths_files(t_file *files);
 t_maxlen			get_max_lengths(t_file *files);
 size_t				get_blocks(t_file *files);
 void				sort_files(t_file **files, t_flag flag);
