@@ -73,5 +73,5 @@ int		is_spec_dir(t_file *file)
 
 	a = ft_strcmp(".", file->filename);
 	b = ft_strcmp("..", file->filename);
-	return (!a && !b);
+	return (!a || !b);
 }
