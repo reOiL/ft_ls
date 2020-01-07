@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 13:04:09 by jwebber           #+#    #+#             */
-/*   Updated: 2020/01/06 13:35:46 by jwebber          ###   ########.fr       */
+/*   Updated: 2020/01/07 15:08:03 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ char	*path_join(char *a, char *b)
 	char *str_res;
 	char *tmp;
 
-	tmp = ft_strjoin(a != NULL ? a : "", a != NULL ? "/" : "");
+	if (ft_strcmp(a, "/"))
+		tmp = ft_strjoin(a != NULL ? a : "", a != NULL ? "/" : "");
+	else
+		tmp = ft_strdup(a);
 	str_res = ft_strjoin(tmp, b != NULL ? b : "");
 	ft_strdel(&tmp);
 	return (str_res);
