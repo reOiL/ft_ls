@@ -32,6 +32,8 @@ t_flag		chr_to_flag(char c)
 		return (FLAG_U);
 	if (c == 'U')
 		return (FLAG_UBIG);
+	if (c == 'G')
+		return (FLAG_G);
 	return (0);
 }
 
