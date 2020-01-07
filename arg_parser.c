@@ -64,7 +64,7 @@ t_flag		parse_attr(char **str, int arg_count, t_file **files, t_file **dirs)
 	i = 0;
 	flag = 0;
 	*files = NULL;
-	while (i < arg_count && str[i][0] == '-' && ft_strlen(str[i]) > 1)
+	while (i < arg_count && (str[i][0] == '-' && str[i][1] != '\0'))
 	{
 		j = 1;
 		while (j < ft_strlen(str[i]))

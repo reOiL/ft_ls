@@ -72,9 +72,9 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 	is_many = arg_dirs->next != NULL;
 	while (arg_dirs)
 	{
-		if (!(arg_dirs->s_stat))
+		if (!(arg_dirs->s_stat) || arg_dirs->s_stat->st_mode == 0)
 			print_error(2, arg_dirs->filename);
-		if (is_dir(arg_dirs) <= 0 || flag & FLAG_D)
+		else if (is_dir(arg_dirs) <= 0 || flag & FLAG_D)
 			print_file_name(arg_dirs, flag);
 		else
 			print_dir(flag, arg_dirs, is_many);
