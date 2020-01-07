@@ -43,9 +43,9 @@ void	sort_by_flag(t_file *lst, t_flag flag)
 		sort_lst(lst, cmp_flag_ascii, flag & FLAG_R ? 0 : 1);
 	else if ((flag & FLAG_D))
 		sort_lst(lst, cmp_flag_ascii, flag & FLAG_R ? 0 : 1);
-	else if (!(flag & FLAG_U))
+	else if ((flag & FLAG_U))
 		sort_lst(lst, cmp_flag_u, flag & FLAG_R ? 0 : 1);
-	else if (!(flag & FLAG_UBIG))
+	else if ((flag & FLAG_UBIG))
 		sort_lst(lst, cmp_flag_ubig, flag & FLAG_R ? 0 : 1);
 }
 
