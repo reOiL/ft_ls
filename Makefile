@@ -11,8 +11,26 @@
 # **************************************************************************** #
 
 NAME = ft_ls
-SRC = main.c
-HEADER = 
+SRC = acrights_helper.c \
+        arg_parser.c \
+        comparators.c \
+        comparators_2.c \
+        del_from_lists.c \
+        errors.c \
+        get_fileinfo_1.c \
+        get_fileinfo_2.c \
+        l_flag_helper1.c \
+        ls_with_l.c \
+        ls_without_l.c \
+        main.c \
+        rec_flag_helper.c \
+        t_file_helper.c \
+        utils.c \
+        utils2.c
+
+HEADER = args.h \
+            ft_ls.h
+
 OBJ = $(SRC:.c=.o)
 FLAGS = -Wall -Wextra -Werror
 LIBFT_PATH = libft/
@@ -29,7 +47,7 @@ $(NAME): $(OBJ) $(HEADER) $(LIBFT_PATH)$(LIBFT)
 $(LIBFT_PATH)$(LIBFT):
 		@$(MAKE) -C $(LIBFT_PATH)
 
-all: $(NAME)
+all: $(NAME) $(HEADER)
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
