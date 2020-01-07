@@ -101,6 +101,7 @@ void	ls_with_l(t_flag flag, t_file *arg_dirs)
 
 	maxlen = get_max_lengths_files(arg_dirs);
 	only_one = (arg_dirs->next) ? 0 : 1;
+	arg_dirs->s_stat->st_dev;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat->st_mode))
