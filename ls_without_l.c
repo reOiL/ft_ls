@@ -37,7 +37,7 @@ int			print_dir1(t_flag flag, t_file *file, t_file **subfiles, int ismany)
 	return (0);
 }
 
-void		print_dir(t_flag flag, t_file *file, int is_many)
+void		print_dir(t_flag flag, t_file *file, int is_many, int is_first)
 {
 	t_file		*subfiles;
 	t_file		*subfiles_iter;
@@ -45,6 +45,8 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 	if (print_dir1(flag, file, &subfiles, is_many) == -1)
 		return ;
 	subfiles_iter = subfiles;
+	if (!is_first)
+		ft_printf("\n");
 	if (is_many)
 		ft_printf("%s:\n", file->fullpath);
 	while (subfiles_iter)
@@ -58,20 +60,22 @@ void		print_dir(t_flag flag, t_file *file, int is_many)
 		while (subfiles_iter)
 		{
 			if (is_dir(subfiles_iter) && !is_spec_dir(subfiles_iter))
-				print_dir(flag, subfiles_iter, 1);
+				print_dir(flag, subfiles_iter, 1, 0);
 			subfiles_iter = subfiles_iter->next;
 		}
 	}
-	if (file->next)
-		ft_printf("\n");
+	//if (file->next)
+	//	ft_printf("\n");
 	free_all(&subfiles);
 }
 
 void		ls_without_l(t_flag flag, t_file *arg_dirs)
 {
 	int is_many;
+	int	is_first;
 
 	is_many = arg_dirs->next != NULL;
+	is_first = 1;
 	while (arg_dirs)
 	{
 		if (!(arg_dirs->s_stat) || arg_dirs->s_stat->st_mode == 0)
@@ -79,7 +83,8 @@ void		ls_without_l(t_flag flag, t_file *arg_dirs)
 		else if (is_dir(arg_dirs) <= 0 || flag & FLAG_D)
 			print_file_name(arg_dirs, flag);
 		else
-			print_dir(flag, arg_dirs, is_many);
+			print_dir(flag, arg_dirs, is_many, is_first);
+		is_first = 0;
 		arg_dirs = arg_dirs->next;
 	}
 }
