@@ -17,7 +17,10 @@ char	*path_join(char *a, char *b)
 	char *str_res;
 	char *tmp;
 
-	tmp = ft_strjoin(a != NULL ? a : "", a != NULL ? "/" : "");
+	if (ft_strcmp(a, "/"))
+		tmp = ft_strjoin(a != NULL ? a : "", a != NULL ? "/" : "");
+	else
+		tmp = ft_strdup(a);
 	str_res = ft_strjoin(tmp, b != NULL ? b : "");
 	ft_strdel(&tmp);
 	return (str_res);
