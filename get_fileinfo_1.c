@@ -6,13 +6,14 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 13:59:04 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 14:01:14 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 10:53:57 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
+char	*get_count_bytes(t_file *file, t_maxlen maxlen,
+							char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*count_bytes;
@@ -33,7 +34,8 @@ char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag fla
 	return (get_end_line(file, str, flag));
 }
 
-char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
+char	*get_group_name(t_file *file, t_maxlen maxlen,
+							char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*group_name;
@@ -57,7 +59,8 @@ char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag
 	return (get_count_bytes(file, maxlen, str, flag));
 }
 
-char *get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
+char	*get_user_name(t_file *file, t_maxlen maxlen,
+						char *acr_hlnks, t_flag flag)
 {
 	size_t	i;
 	char	*user_name;
@@ -81,7 +84,7 @@ char *get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag)
 	return (get_group_name(file, maxlen, str, flag));
 }
 
-char *get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag)
+char	*get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag)
 {
 	size_t	i;
 	char	*hardlinks;
@@ -102,7 +105,7 @@ char *get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag)
 	return (get_user_name(file, maxlen, str, flag));
 }
 
-char *get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag)
+char	*get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag)
 {
 	char	*acrights;
 

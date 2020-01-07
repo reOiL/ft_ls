@@ -6,14 +6,14 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:37:06 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 14:37:38 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 10:51:56 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "args.h"
 
-t_file *go_rec(t_file **subfiles, t_flag flag, char *path)
+t_file	*go_rec(t_file **subfiles, t_flag flag, char *path)
 {
 	t_file	*tmp;
 

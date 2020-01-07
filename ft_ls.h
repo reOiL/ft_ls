@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 12:50:39 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 12:57:44 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 10:56:09 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,21 @@ int					print_error(int code, char *str);
 /*
 ** get_fileinfo_1.c
 */
-char *get_count_bytes(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
-char *get_group_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
-char *get_user_name(t_file *file, t_maxlen maxlen, char *acr_hlnks, t_flag flag);
-char *get_hard_links(t_file *file, t_maxlen maxlen, char *acrights, int flag);
-char *get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag);
+char				*get_count_bytes(t_file *file, t_maxlen maxlen,
+										char *acr_hlnks, t_flag flag);
+char				*get_group_name(t_file *file, t_maxlen maxlen,
+									char *acr_hlnks, t_flag flag);
+char				*get_user_name(t_file *file, t_maxlen maxlen,
+									char *acr_hlnks, t_flag flag);
+char				*get_hard_links(t_file *file, t_maxlen maxlen,
+									char *acrights, int flag);
+char				*get_fileinfo(t_file *file, t_maxlen maxlen, t_flag flag);
 
 /*
 ** get_fileinfo_2.c
 */
 char				*add_linkway(t_file *file, char *str);
-char *get_end_line(t_file *file, char *acr_hlnks, t_flag flag);
+char				*get_end_line(t_file *file, char *acr_hlnks, t_flag flag);
 
 /*
 ** l_flag_helper1.c

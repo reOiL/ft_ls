@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:15:04 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 14:16:08 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 10:51:44 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*add_linkway(t_file *file, char *str)
 	return (full_str);
 }
 
-char *get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
+char	*get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
 	char	*needed_time;
