@@ -6,7 +6,7 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 12:42:47 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/07 10:54:52 by jwebber          ###   ########.fr       */
+/*   Updated: 2020/01/07 16:11:36 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ t_flag			parse_attr(char **str, int arg_count, \
 /*
 ** ls_with_l.c
 */
-void print_fileinfo_l(t_file **subfiles, t_flag flag, t_maxlen maxlen_files);
-void print_files_links(char *filename, t_flag flag, char *path,
-					   t_maxlen maxlen_files);
+void			print_fileinfo_l(t_file **subfiles, t_flag flag,
+									t_maxlen maxlen_files);
+void			print_files_links(char *filename, t_flag flag, char *path,
+						t_maxlen maxlen_files);
 int				print_dirfiles(char *dirname, t_flag flag, char \
 				*path, int only_one);
-void print_files_l(t_flag flag, t_file *arg_dirs, int only_one,
-				   t_maxlen maxlen_files);
+void			print_files_l(t_flag flag, t_file *arg_dirs, int only_one,
+					t_maxlen maxlen_files);
 void			ls_with_l(t_flag flag, t_file *arg_dirs);
 
 /*

@@ -6,21 +6,22 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:18:19 by eblackbu          #+#    #+#             */
-/*   Updated: 2020/01/06 14:40:18 by eblackbu         ###   ########.fr       */
+/*   Updated: 2020/01/07 16:10:48 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "args.h"
 
-void print_fileinfo_l(t_file **subfiles, t_flag flag, t_maxlen maxlen_files)
+void	print_fileinfo_l(t_file **subfiles, t_flag flag, t_maxlen maxlen_files)
 {
 	t_maxlen	maxlen;
 	char		*fileinfo;
 	t_file		*tmp;
 
 	sort_by_flag(*subfiles, flag);
-	maxlen = maxlen_files.len_hlinks ? maxlen_files : get_max_lengths(*subfiles);
+	maxlen = maxlen_files.len_hlinks ? maxlen_files :
+		get_max_lengths(*subfiles);
 	tmp = *subfiles;
 	while (tmp)
 	{
@@ -31,8 +32,8 @@ void print_fileinfo_l(t_file **subfiles, t_flag flag, t_maxlen maxlen_files)
 	}
 }
 
-void print_files_links(char *filename, t_flag flag, char *path,
-					   t_maxlen maxlen_files)
+void	print_files_links(char *filename, t_flag flag, char *path,
+							t_maxlen maxlen_files)
 {
 	t_file		*file;
 
@@ -42,7 +43,7 @@ void print_files_links(char *filename, t_flag flag, char *path,
 	free_all(&file);
 }
 
-int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
+int		print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 {
 	DIR				*dir;
 	struct dirent	*dp;
@@ -71,8 +72,8 @@ int			print_dirfiles(char *dirname, t_flag flag, char *path, int only_one)
 	return (0);
 }
 
-void print_files_l(t_flag flag, t_file *arg_dirs, int only_one,
-				   t_maxlen maxlen_files)
+void	print_files_l(t_flag flag, t_file *arg_dirs, int only_one,
+						t_maxlen maxlen_files)
 {
 	if (!only_one && S_ISDIR(arg_dirs->s_stat->st_mode) && \
 	!(flag & FLAG_REC) && !(flag & FLAG_D))
@@ -93,7 +94,7 @@ void print_files_l(t_flag flag, t_file *arg_dirs, int only_one,
 	}
 }
 
-void		ls_with_l(t_flag flag, t_file *arg_dirs)
+void	ls_with_l(t_flag flag, t_file *arg_dirs)
 {
 	int			only_one;
 	t_maxlen	maxlen;
