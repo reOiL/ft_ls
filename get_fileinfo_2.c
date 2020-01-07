@@ -31,29 +31,45 @@ char	*add_linkway(t_file *file, char *str)
 	return (full_str);
 }
 
+char 	*get_timestamp(t_file *file, t_flag flag)
+{
+	char *timestamp;
+	char *ret;
+
+	ret = ft_strnew(14);
+	if (flag & FLAG_UBIG)
+		timestamp = ctime(&file->s_stat->st_ctimespec.tv_sec);
+	else if (flag & FLAG_U)
+		timestamp = ctime(&file->s_stat->st_atimespec.tv_sec);
+	else
+		timestamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
+	if (file->s_stat->st_mtimespec.tv_sec < time(NULL) - 15768000)
+	{
+		ft_strncpy(ret, &timestamp[4], 7);
+		ft_strncpy(&ret[7], &timestamp[19], 6);
+	}
+	else
+	{
+		ft_strncpy(ret, &timestamp[4], 13);
+	}
+	return (ret);
+}
+
 char	*get_end_line(t_file *file, char *acr_hlnks, t_flag flag)
 {
 	char	*time_stamp;
-	char	*needed_time;
 	char	*str;
 
-	if (flag & FLAG_UBIG)
-		time_stamp = ctime(&file->s_stat->st_ctimespec.tv_sec);
-	else if (flag & FLAG_U)
-		time_stamp = ctime(&file->s_stat->st_atimespec.tv_sec);
-	else
-		time_stamp = ctime(&file->s_stat->st_mtimespec.tv_sec);
-	needed_time = ft_strnew(14);
-	ft_strncpy(needed_time, &time_stamp[4], 13);
+	time_stamp = get_timestamp(file, flag);
 	str = ft_strnew(ft_strlen(acr_hlnks) + 15 + ft_strlen(file->filename));
 	ft_strcpy(str, acr_hlnks);
 	str[ft_strlen(acr_hlnks)] = ' ';
-	ft_strcpy(&str[ft_strlen(acr_hlnks) + 1], needed_time);
-	str[ft_strlen(acr_hlnks) + ft_strlen(needed_time)] = ' ';
+	ft_strcpy(&str[ft_strlen(acr_hlnks) + 1], time_stamp);
+	str[ft_strlen(acr_hlnks) + ft_strlen(time_stamp)] = ' ';
 	ft_strcpy(&str[ft_strlen(acr_hlnks) + \
-			ft_strlen(needed_time) + 1], file->filename);
+			ft_strlen(time_stamp) + 1], file->filename);
 	ft_strdel(&acr_hlnks);
-	ft_strdel(&needed_time);
+	ft_strdel(&time_stamp);
 	if (S_ISLNK(file->s_stat->st_mode))
 		str = add_linkway(file, str);
 	return (str);
