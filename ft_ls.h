@@ -111,6 +111,7 @@ void				print_dir(t_flag flag, t_file *file, int is_many,
 ** l_flag_helper1.c
 */
 t_maxlen			initialize_maxlen(void);
+t_maxlen			get_max_lengths_files(t_file *files);
 t_maxlen			get_max_lengths(t_file *files);
 size_t				get_blocks(t_file *files);
 
